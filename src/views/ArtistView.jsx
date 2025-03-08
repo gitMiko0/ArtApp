@@ -39,19 +39,24 @@ const ArtistView = () => {
         <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
           <h2 className="font-alexbrush text-2xl mb-2">Artists</h2>
           <ul>
-            {artists.map((artist) => (
-              <li
-                key={artist.artistId} // User clicked item
-                className={`rounded-xl cursor-pointer p-2 m-4 mb-2 rounded transition-colors duration-300  ${
-                  selectedArtistId === artist.artistId ? "rounded-xl bg-[#21130d] text-white" : "bg-white bg-opacity-20 -xl backdrop-blur hover:bg-[#21130d] hover:text-white"
-                }`}
-                onClick={() => setSelectedArtistId(artist.artistId)}
-              >
-                {artist.firstName} {artist.lastName}
-              </li>
-            ))}
+            {artists
+              .sort((a, b) => a.lastName.localeCompare(b.lastName))
+              .map((artist) => (
+                <li
+                  key={artist.artistId}
+                  className={`rounded-xl cursor-pointer p-2 m-4 mb-2 rounded transition-colors duration-300  ${
+                    selectedArtistId === artist.artistId
+                      ? "rounded-xl bg-[#21130d] text-white"
+                      : "bg-white bg-opacity-20 -xl backdrop-blur hover:bg-[#21130d] hover:text-white"
+                  }`}
+                  onClick={() => setSelectedArtistId(artist.artistId)}
+                >
+                  {artist.firstName} {artist.lastName}
+                </li>
+              ))}
           </ul>
         </div>
+
 
         {/* Middle column - Artist details */}
         <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
