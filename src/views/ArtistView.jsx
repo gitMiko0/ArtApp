@@ -1,5 +1,33 @@
 import React, { useState, useEffect } from "react";
 
+const Paintings = ({ artistId }) => {
+  const [paintings, setPaintings] = useState([]);
+
+  useEffect(() => {
+    const fetchPaintings = async () => {
+      try {
+        const response = await fetch(`https://nodea1.onrender.com/api/paintings/artist/${artistId}`);
+        const data = await response.json();
+        setPaintings(data);
+      } catch (error) {
+        console.error("Error fetching paintings:", error);
+      }
+    };
+
+    fetchPaintings();
+  }, [artistId]); // Fetch paintings when artistId changes
+
+  return (
+    <div>
+      {paintings.map(painting => (
+        <div key={painting.paintingId}>
+          <h3 className="font-quicksand">{painting.title}</h3>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const ArtistView = () => {
   const [artists, setArtists] = useState([]); // State to store artists
   const [selectedArtistId, setSelectedArtistId] = useState(null); // State for selected artist ID
@@ -86,13 +114,18 @@ const ArtistView = () => {
           )}
         </div>
 
-        {/* Right column - 2/6 width */}
+        {/* Right column - 2/6 width source https://nodea1.onrender.com/api/paintings/artist/:Id
+            Paintings for the selected artist sorted by title (thumbnail, painting, title, year)
+            The user should be able to changesort order between painting title
+            and year The user should be able to select a painting (click a button or a
+            hyperlink or a row, it’s up to you), which will display the single painting modal dialog
+        */}
         <div className="w-5/12 bg-gray-200 bg-opacity-50 p-4">
-          <h2 className="font-alexbrush text-2xl mb-2">Additional Information</h2>
+          <h2 className="font-alexbrush text-2xl mb-2">Paintings</h2>
           {selectedArtistId ? (
-            <p>Additional info for artist ID: {selectedArtistId}</p>
+           <Paintings artistId={selectedArtistId} />
           ) : (
-            <p>Select an artist to view additional information.</p>
+            <p>Select an artist to view their paintings.</p>
           )}
         </div>
       </div>
