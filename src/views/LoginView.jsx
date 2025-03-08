@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import background from "../assets/loginBackground.jpg";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { TypeAnimation } from 'react-type-animation';
 
 const LoginView = () => {
+  const background = "/assets/loginBackground.jpg"; //in public folder
   const navigate = useNavigate();
   const [isRegistering, setIsRegistering] = useState(false);
   const [email, setEmail] = useState("");
@@ -99,14 +99,14 @@ const LoginView = () => {
           <input
             type="text"
             placeholder="Email"
-            className="p-3 rounded-lg bg-white/20 text-white placeholder-gray-200 focus:outline-none backdrop-blur-sm border border-white/30 mb-4"
+            className="font-quicksand p-3 rounded-lg bg-white/20 text-white placeholder-gray-200 focus:outline-none backdrop-blur-sm border border-white/30 mb-4"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
             placeholder="Password"
-            className="p-3 rounded-lg bg-white/20 text-white placeholder-gray-200 focus:outline-none backdrop-blur-sm border border-white/30 mb-4"
+            className="font-quicksand p-3 rounded-lg bg-white/20 text-white placeholder-gray-200 focus:outline-none backdrop-blur-sm border border-white/30 mb-4"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

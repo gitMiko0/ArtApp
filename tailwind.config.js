@@ -9,6 +9,7 @@ module.exports = {
       fontFamily: {
         waterfall: ['Waterfall', 'sans-serif'],
         alexbrush: ['Alex Brush', 'sans-serif'],
+        quicksand: ['Quicksand', 'sans-serif'],
       },
     },
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ArtistView from './views/ArtistView';
 import GalleryView from './views/GalleryView';
@@ -12,16 +12,29 @@ const App = () => {
   return (
     <Router>
       <div className="App">
-      <LoginView />
-        <main className="p-4">
-          <Routes>
-            <Route path="/" element={<GalleryView />} />
-            <Route path="/artists" element={<ArtistView />} />
-            <Route path="/genres" element={<GenreView />} />
-            <Route path="/paintings" element={<PaintingView />} />
-            <Route path="/login" element={<LoginView />} />
-          </Routes>
-        </main>
+        <Routes>
+          {/* Set the default route to redirect to /login */}
+          <Route path="/" element={<Navigate to="/login" />} />
+          {/* Login page */}
+          <Route path="/login" element={<LoginView />} />
+          {/* Routes that include Navbar */}
+          <Route
+            path="*"
+            element={
+              <>
+                <Navbar />
+                <main>
+                  <Routes>
+                    <Route path="/artists" element={<ArtistView />} />
+                    <Route path="/genres" element={<GenreView />} />
+                    <Route path="/paintings" element={<PaintingView />} />
+                    <Route path="/" element={<GalleryView />} />
+                  </Routes>
+                </main>
+              </>
+            }
+          />
+        </Routes>
       </div>
     </Router>
   );
