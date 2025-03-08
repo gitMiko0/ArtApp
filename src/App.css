@@ -8,3 +8,21 @@
   padding: 2rem;
   text-align: center;
 }
+
+/* Custom Scrollbar Styling -- Mainly for the autocomplete results, and possible other data that requires it. TailwinCSS doesn't seem to supoprt this.
+  AFAIK this is also browser-specific. So far, this is tested and works with Chrome use as a class "custom-scrollbar" to apply to element. */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px; /* Thin scrollbar */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* No background */
+    border-radius: 40px; /* Ensures the scrollbar stays rounded */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #21130d;
+    border-radius: 40px;
+  }
+
+/* -- End: Custom Scrollbar Styling --*/

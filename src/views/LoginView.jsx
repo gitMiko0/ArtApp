@@ -114,7 +114,7 @@ const LoginView = () => {
             <input
               type="password"
               placeholder="Retype Password"
-              className="p-3 rounded-lg bg-white/20 text-white placeholder-gray-300 focus:outline-none backdrop-blur-sm border border-white/30 mb-4"
+              className="font-quicksand p-3 rounded-lg bg-white/20 text-white placeholder-gray-200 focus:outline-none backdrop-blur-sm border border-white/30 mb-4"
               value={retypePassword}
               onChange={(e) => setRetypePassword(e.target.value)}
             />
