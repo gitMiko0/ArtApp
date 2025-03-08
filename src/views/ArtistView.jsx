@@ -31,16 +31,16 @@ const ArtistView = () => {
     >
       <div className="flex backdrop-blur h-full w-full bg-black bg-opacity-40">
         {/* Left column - 2/6 width */}
-        <div className="font-quicksand custom-scrollbar w-2/6 bg-gray-100 bg-opacity-50 p-4 overflow-y-auto">
-          <h2 className="text-lg font-bold mb-4">Artists</h2>
+        <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
+          <h2 className="font-alexbrush text-2xl mb-2">Artists</h2>
           <ul>
             {artists.map((artist) => (
               <li
-                key={artist.artistId} // Using artistId instead of id
-                className={`cursor-pointer p-2 mb-2 rounded ${
-                  selectedArtistId === artist.artistId ? "bg-[#21130d] text-white" : "bg-gray-200"
+                key={artist.artistId} // User clicked item
+                className={`rounded-xl cursor-pointer p-2 mb-2 rounded transition-colors duration-300  ${
+                  selectedArtistId === artist.artistId ? "rounded-xl bg-[#21130d] text-white" : "rounded-xl backdrop-blur hover:bg-[#21130d] hover:text-white"
                 }`}
-                onClick={() => setSelectedArtistId(artist.artistId)} // Using artistId
+                onClick={() => setSelectedArtistId(artist.artistId)}
               >
                 {artist.firstName} {artist.lastName}
               </li>
@@ -49,8 +49,8 @@ const ArtistView = () => {
         </div>
 
         {/* Middle column - 2/6 width */}
-        <div className="w-2/6 bg-white bg-opacity-50 p-4">
-          <h2 className="text-lg font-bold mb-4">Artist Details</h2>
+        <div className="font-quicksand custom-scrollbar w-4/12 bg-white bg-opacity-40 p-4 overflow-y-auto">
+          <h2 className="font-alexbrush text-2xl mb-2">Artist Details</h2>
           {selectedArtistId ? (
             <>
               {artists
@@ -74,7 +74,7 @@ const ArtistView = () => {
                     </p>
                     <button
                       href={artist.artistLink}
-                      className="text-white bg-[#21130d] p-2 mt-2 rounded"
+                      className="text-white bg-gray-600 p-2 mt-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
                     >
                       Learn more
                     </button>
@@ -87,8 +87,8 @@ const ArtistView = () => {
         </div>
 
         {/* Right column - 2/6 width */}
-        <div className="w-2/6 bg-gray-200 bg-opacity-50 p-4">
-          <h2 className="text-lg font-bold mb-4">Additional Information</h2>
+        <div className="w-5/12 bg-gray-200 bg-opacity-50 p-4">
+          <h2 className="font-alexbrush text-2xl mb-2">Additional Information</h2>
           {selectedArtistId ? (
             <p>Additional info for artist ID: {selectedArtistId}</p>
           ) : (
