@@ -1,33 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Loading from "../components/Loading";
 
-const Paintings = ({ artistId }) => {
-  const [paintings, setPaintings] = useState([]);
-
-  useEffect(() => {
-    const fetchPaintings = async () => {
-      try {
-        const response = await fetch(`https://nodea1.onrender.com/api/paintings/artist/${artistId}`);
-        const data = await response.json();
-        setPaintings(data);
-      } catch (error) {
-        console.error("Error fetching paintings:", error);
-      }
-    };
-
-    fetchPaintings();
-  }, [artistId]); // Fetch paintings when artistId changes
-
-  return (
-    <div>
-      {paintings.map(painting => (
-        <div key={painting.paintingId}>
-          <h3 className="font-quicksand">{painting.title}</h3>
-        </div>
-      ))}
-    </div>
-  );
-};
-
+/**
+ * Component to display a list of artists and their details.
+ * Allows users to select an artist and view their paintings.
+ */
 const ArtistView = () => {
   const [artists, setArtists] = useState([]); // State to store artists
   const [selectedArtistId, setSelectedArtistId] = useState(null); // State for selected artist ID
@@ -57,8 +34,8 @@ const ArtistView = () => {
       className="pt-12 flex h-screen w-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${background})` }}
     >
-      <div className="flex backdrop-blur h-full w-full bg-black bg-opacity-40">
-        {/* Left column - 2/6 width */}
+      <div className="flex h-full w-full">
+        {/* Left column - Artist list */}
         <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
           <h2 className="font-alexbrush text-2xl mb-2">Artists</h2>
           <ul>
@@ -66,7 +43,7 @@ const ArtistView = () => {
               <li
                 key={artist.artistId} // User clicked item
                 className={`rounded-xl cursor-pointer p-2 m-4 mb-2 rounded transition-colors duration-300  ${
-                  selectedArtistId === artist.artistId ? "rounded-xl bg-[#21130d] text-white" : "rounded-xl backdrop-blur hover:bg-[#21130d] hover:text-white"
+                  selectedArtistId === artist.artistId ? "rounded-xl bg-[#21130d] text-white" : "bg-white bg-opacity-20 -xl backdrop-blur hover:bg-[#21130d] hover:text-white"
                 }`}
                 onClick={() => setSelectedArtistId(artist.artistId)}
               >
@@ -76,7 +53,7 @@ const ArtistView = () => {
           </ul>
         </div>
 
-        {/* Middle column - 2/6 width */}
+        {/* Middle column - Artist details */}
         <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
           <h2 className="font-alexbrush text-2xl mb-2">Artist Details</h2>
           {selectedArtistId ? (
@@ -84,7 +61,7 @@ const ArtistView = () => {
               {artists
                 .filter((artist) => artist.artistId === selectedArtistId)
                 .map((artist) => (
-                  <div key={artist.artistId}>
+                  <div className="p-4 bg-white bg-opacity-10 rounded-xl backdrop-blur"key={artist.artistId}>
                     <p>
                       <strong>Name:</strong> {artist.firstName} {artist.lastName}
                     </p>
@@ -100,12 +77,12 @@ const ArtistView = () => {
                     <p>
                       <strong>Details:</strong> {artist.details}
                     </p>
-                    <button
-                      href={artist.artistLink}
-                      className="text-white bg-[#ae752f] p-2 mt-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+                    <a
+                    href={artist.artistLink}
+                    className="inline-block text-white bg-[#ae752f] p-2 mt-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
                     >
-                      Learn more
-                    </button>
+                    Learn more
+                  </a>
                   </div>
                 ))}
             </>
@@ -114,12 +91,7 @@ const ArtistView = () => {
           )}
         </div>
 
-        {/* Right column - 2/6 width source https://nodea1.onrender.com/api/paintings/artist/:Id
-            Paintings for the selected artist sorted by title (thumbnail, painting, title, year)
-            The user should be able to changesort order between painting title
-            and year The user should be able to select a painting (click a button or a
-            hyperlink or a row, it’s up to you), which will display the single painting modal dialog
-        */}
+        {/* Right column - Paintings for the selected artist */}
         <div className="w-5/12 bg-gray-200 bg-opacity-50 p-4">
           <h2 className="font-alexbrush text-2xl mb-2">Paintings</h2>
           {selectedArtistId ? (
@@ -129,6 +101,47 @@ const ArtistView = () => {
           )}
         </div>
       </div>
+    </div>
+  );
+};
+
+/**
+ * Component to display paintings for a selected artist.
+ * Fetches paintings from an API based on the provided artistId.
+ */
+const Paintings = ({ artistId }) => {
+  const [paintings, setPaintings] = useState(null); // Initially set to null
+  const [loading, setLoading] = useState(true); // Loading state
+
+  useEffect(() => {
+    const fetchPaintings = async () => {
+      setLoading(true); // Indicate loading before fetching
+      try {
+        const response = await fetch(`https://nodea1.onrender.com/api/paintings/artist/${artistId}`);
+        const data = await response.json();
+        setPaintings(data);
+      } catch (error) {
+        console.error("Error fetching paintings:", error);
+        setPaintings([]); // Set paintings to empty array on error
+      } finally {
+        setLoading(false); // Indicate loading complete
+      }
+    };
+
+    fetchPaintings();
+  }, [artistId]); // Re-fetch paintings when artistId changes
+
+  return (
+    <div>
+      {loading ? (
+        <Loading />
+      ) : (
+        paintings.map((painting) => (
+          <div key={painting.paintingId}>
+            <h3 className="font-quicksand">{painting.title}</h3>
+          </div>
+        ))
+      )}
     </div>
   );
 };
