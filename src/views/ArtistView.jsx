@@ -65,7 +65,7 @@ const ArtistView = () => {
             {artists.map((artist) => (
               <li
                 key={artist.artistId} // User clicked item
-                className={`rounded-xl cursor-pointer p-2 mb-2 rounded transition-colors duration-300  ${
+                className={`rounded-xl cursor-pointer p-2 m-4 mb-2 rounded transition-colors duration-300  ${
                   selectedArtistId === artist.artistId ? "rounded-xl bg-[#21130d] text-white" : "rounded-xl backdrop-blur hover:bg-[#21130d] hover:text-white"
                 }`}
                 onClick={() => setSelectedArtistId(artist.artistId)}
@@ -77,7 +77,7 @@ const ArtistView = () => {
         </div>
 
         {/* Middle column - 2/6 width */}
-        <div className="font-quicksand custom-scrollbar w-4/12 bg-white bg-opacity-40 p-4 overflow-y-auto">
+        <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
           <h2 className="font-alexbrush text-2xl mb-2">Artist Details</h2>
           {selectedArtistId ? (
             <>
@@ -102,7 +102,7 @@ const ArtistView = () => {
                     </p>
                     <button
                       href={artist.artistLink}
-                      className="text-white bg-gray-600 p-2 mt-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+                      className="text-white bg-[#ae752f] p-2 mt-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
                     >
                       Learn more
                     </button>
@@ -125,7 +125,7 @@ const ArtistView = () => {
           {selectedArtistId ? (
            <Paintings artistId={selectedArtistId} />
           ) : (
-            <p>Select an artist to view their paintings.</p>
+            <p className="font-quicksand">Select an artist to view their paintings.</p>
           )}
         </div>
       </div>

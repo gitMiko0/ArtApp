@@ -27,6 +27,7 @@ const App = () => {
                   <Routes>
                     <Route path="/artists" element={<ArtistView />} />
                     <Route path="/genres" element={<GenreView />} />
+                    <Route path="/galleries" element={<GalleryView />} />
                     <Route path="/paintings" element={<PaintingView />} />
                     <Route path="/" element={<GalleryView />} />
                   </Routes>

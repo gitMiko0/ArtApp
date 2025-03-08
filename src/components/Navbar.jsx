@@ -12,7 +12,7 @@ const Navbar = () => {
           Elysiana
         </Link>
         <ul className="flex space-x-8"> {/* navbar items animation credit: https://getdevdone.com/blog/our-favorite-navigation-menu-effects.html */}
-          {['Artists', 'Genres', 'Paintings', 'Login'].map((item) => {
+          {['Artists', 'Paintings', 'Genres', 'Galleries', 'Login'].map((item) => {
             const isActive = location.pathname === `/${item.toLowerCase()}`;
 
             return (
