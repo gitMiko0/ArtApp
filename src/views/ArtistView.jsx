@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
+import SortedList from "../components/SortedList";
+import { fetchData } from "../services/apiServices.js";
 
 /**
  * Component to display a list of artists and their details.
@@ -10,25 +12,15 @@ const ArtistView = () => {
   const [selectedArtistId, setSelectedArtistId] = useState(null); // State for selected artist ID
   const background = "/assets/loginBackground.jpg"; // Background image path
 
-  // Fetch artists from API
   useEffect(() => {
-    const fetchArtists = async () => {
-      try {
-        const response = await fetch("https://nodea1.onrender.com/api/artists");
-        const data = await response.json();
-        if (Array.isArray(data)) {
-          setArtists(data);
-        } else {
-          console.error("Invalid data format:", data);
-        }
-      } catch (error) {
-        console.error("Error fetching artists:", error);
-      }
+    const loadArtists = async () => {
+      const data = await fetchData("artists");
+      console.log("Fetched Artists:", data); // Debugging output
+      setArtists(data);
     };
 
-    fetchArtists();
+    loadArtists();
   }, []);
-
   return (
     <div
       className="pt-12 flex h-screen w-screen bg-cover bg-center"
@@ -37,24 +29,15 @@ const ArtistView = () => {
       <div className="flex h-full w-full">
         {/* Left column - Artist list */}
         <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
-          <h2 className="font-alexbrush text-2xl mb-2">Artists</h2>
-          <ul>
-            {artists
-              .sort((a, b) => a.lastName.localeCompare(b.lastName))
-              .map((artist) => (
-                <li
-                  key={artist.artistId}
-                  className={`rounded-xl cursor-pointer p-2 m-4 mb-2 rounded transition-colors duration-300  ${
-                    selectedArtistId === artist.artistId
-                      ? "rounded-xl bg-[#21130d] text-white"
-                      : "bg-white bg-opacity-20 -xl backdrop-blur hover:bg-[#21130d] hover:text-white"
-                  }`}
-                  onClick={() => setSelectedArtistId(artist.artistId)}
-                >
-                  {artist.firstName} {artist.lastName}
-                </li>
-              ))}
-          </ul>
+          <SortedList
+            header="Artists"
+            data={artists}
+            sortBy="lastName"
+            selectedId={selectedArtistId}
+            onItemClick={setSelectedArtistId}
+            itemKey="artistId"
+            renderItem={(artist) => `${artist.firstName} ${artist.lastName}`}
+          />
         </div>
 
 
@@ -122,8 +105,7 @@ const Paintings = ({ artistId }) => {
     const fetchPaintings = async () => {
       setLoading(true); // Indicate loading before fetching
       try {
-        const response = await fetch(`https://nodea1.onrender.com/api/paintings/artist/${artistId}`);
-        const data = await response.json();
+        const data = await fetchData("paintings/artist/" + artistId);
         setPaintings(data);
       } catch (error) {
         console.error("Error fetching paintings:", error);
