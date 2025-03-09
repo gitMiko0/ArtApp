@@ -57,7 +57,7 @@ const GalleryView = () => {
 
         {/* Middle column - Gallery Details */}
         <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
-          <h2 className="font-bold font-alexbrush text-2xl mb-2">Gallery Details</h2>
+          <h2 className="font-bold font-alexbrush text-4xl mb-2">Gallery Details</h2>
           {selectedGallery ? (
           <div className="p-4 bg-white bg-opacity-10 rounded-xl backdrop-blur">
               <p><strong>Name:</strong> {selectedGallery.galleryName}</p>
@@ -83,7 +83,7 @@ const GalleryView = () => {
 
         {/* Right column - Paintings Section */}
         <div className="w-5/12 bg-gray-200 bg-opacity-50 p-4">
-          <h2 className="font-bold font-alexbrush text-2xl mb-2">Paintings</h2>
+          <h2 className="font-bold font-alexbrush text-4xl mb-2">Paintings</h2>
         </div>
       </div>
     </div>
