@@ -5,7 +5,7 @@ import { fetchData } from "../services/apiServices.js";
     Handle states for fetches in order to simplify loading screens and error handling
     in all views.
 */
-const useFetch = (endpoint) => {
+const LoadingFetch = (endpoint) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -32,4 +32,4 @@ const useFetch = (endpoint) => {
   return { data, loading, error };
 };
 
-export default useFetch;
+export default LoadingFetch;

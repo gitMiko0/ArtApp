@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
-import useFetch from "../hooks/useFetch";
+import LoadingFetch from "../hooks/useFetch";
 
 const GalleryView = () => {
   const background = "/assets/paintingsBG.jpg";
-  const { data: galleries, loading, error } = useFetch("galleries");
+  const { data: galleries, loading, error } = LoadingFetch("galleries");
   const [selectedGalleryId, setSelectedGalleryId] = useState(null);
 
   const selectedGallery = galleries?.find(

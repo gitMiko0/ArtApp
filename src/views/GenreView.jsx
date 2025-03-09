@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
+import PaintingsList from "../components/PaintingsList.jsx";
 import { fetchData } from "../services/apiServices.js";
 
 const GenreView = () => {
   const background = "/assets/jr-korpa-KMEiyRyHW74-unsplash.jpg";
   const [genres, setGenres] = useState([]); // State to store genres
   const [selectedGenreId, setSelectedGenreId] = useState(null); // State for selected genre ID
+  const [selectedGenre, setSelectedGenre] = useState(null); // State for selected genre details
   const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
@@ -25,6 +27,16 @@ const GenreView = () => {
 
     loadGenres();
   }, []);
+
+  // Fetch selected genre details when selectedGenreId changes
+  useEffect(() => {
+    if (selectedGenreId) {
+      const selected = genres.find((genre) => genre.genreId === selectedGenreId);
+      setSelectedGenre(selected);
+    } else {
+      setSelectedGenre(null); // Clear details when no genre is selected
+    }
+  }, [selectedGenreId, genres]);
 
   return (
     <div
@@ -50,10 +62,36 @@ const GenreView = () => {
         </div>
 
         {/* Right column - Genre details */}
-        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 bg-gray-200 bg-opacity-10 p-4 overflow-y-auto flex flex-col">
-          <div className="h-3/12 bg-gray-200 bg-opacity-10 p-4">Header content</div>
-          <div className="h-9/12 bg-gray-200 bg-opacity-10 p-4 overflow-y-auto">
-            Scrolling content
+        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 bg-gray-200 bg-opacity-10 overflow-y-auto flex flex-col">
+          <div className="h-3/12">
+            {/* Genre details shown here */}
+            {selectedGenre ? (
+              <div>
+                <h2 className="font-bold mt-2 font-alexbrush text-3xl">
+                  {selectedGenre.genreName}
+                </h2>
+                <p className="max-h-1/12 text-sm p-2 mt-0 m-2 bg-white bg-opacity-10 rounded-xl backdrop-blur-xl overflow-y-auto">
+                  <strong>Description:</strong> {selectedGenre.description}
+                  <a
+                    href={selectedGenre.wikiLink}
+                    className="text-blue-500 hover:text-blue-700"
+                  >
+                    Learn more on Wikipedia
+                  </a>
+                </p>
+              </div>
+            ) : (
+              <p>Select a genre to see details.</p>
+            )}
+          </div>
+          {/* Paintings for the selected genre */}
+          <div className="custom-scrollbar  h-9/12 p-4 overflow-y-auto">
+            <PaintingsList
+              queryType="genres"
+              queryValue={selectedGenreId}
+              size="w_200"
+              columns={3}
+            />
           </div>
         </div>
       </div>

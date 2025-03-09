@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
-import useFetch from "../hooks/useFetch";
-
+import LoadingFetch from "../hooks/useFetch";
+import PaintingsList from "../components/PaintingsList";
 /**
  * Component to display a list of artists and their details.
  * Allows users to select an artist and view their paintings.
  */
 const ArtistView = () => {
   const background = "/assets/loginBackground.jpg"; // Background image path
-  const { data: artists, loading, error } = useFetch("artists");
+  const { data: artists, loading, error } = LoadingFetch("artists");
   const [selectedArtistId, setSelectedArtistId] = useState(null); // State for selected artist ID
 
   return (
@@ -44,7 +44,7 @@ const ArtistView = () => {
             artists
               .filter((artist) => artist.artistId === selectedArtistId)
               .map((artist) => (
-                <div className="p-4 bg-white bg-opacity-10 rounded-xl backdrop-blur" key={artist.artistId}>
+                <div className="p-4 bg-white bg-opacity-30 rounded-xl backdrop-blur-xl" key={artist.artistId}>
                   <p>
                     <strong>Name:</strong> {artist.firstName} {artist.lastName}
                   </p>
@@ -74,41 +74,15 @@ const ArtistView = () => {
         </div>
 
         {/* Right column - Paintings for the selected artist */}
-        <div className="w-5/12 bg-gray-200 bg-opacity-50 p-4">
-          <h2 className="font-bold font-alexbrush text-4xl mb-2">Paintings</h2>
-          {selectedArtistId ? (
-            <Paintings artistId={selectedArtistId} />
-          ) : (
-            <p className="font-quicksand">Select an artist to view their paintings.</p>
-          )}
+        <div className="custom-scrollbar w-5/12 bg-gray-200 bg-opacity-20 overflow-y-auto">
+        <h2 className="font-bold font-alexbrush text-4xl mt-4 mb-0">Paintings</h2>
+          <PaintingsList 
+            queryType="artist" 
+            queryValue={selectedArtistId} 
+            size="w_400" 
+            artistId={selectedArtistId} />          
         </div>
       </div>
-    </div>
-  );
-};
-
-/**
- * Component to display paintings for a selected artist.
- * Fetches paintings from an API based on the provided artistId.
- */
-const Paintings = ({ artistId }) => {
-  const { data: paintings, loading, error } = useFetch(`paintings/artist/${artistId}`);
-
-  return (
-    <div>
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <p className="text-red-500">{error}</p>
-      ) : paintings.length > 0 ? (
-        paintings.map((painting) => (
-          <div key={painting.paintingId}>
-            <h3 className="font-quicksand">{painting.title}</h3>
-          </div>
-        ))
-      ) : (
-        <p>No paintings available.</p>
-      )}
     </div>
   );
 };
