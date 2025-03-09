@@ -1,33 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
-import { fetchData } from "../services/apiServices.js";
+import useFetch from "../hooks/useFetch";
 
 /**
  * Component to display a list of artists and their details.
  * Allows users to select an artist and view their paintings.
  */
 const ArtistView = () => {
-  const [artists, setArtists] = useState([]); // State to store artists
-  const [selectedArtistId, setSelectedArtistId] = useState(null); // State for selected artist ID
   const background = "/assets/loginBackground.jpg"; // Background image path
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadArtists = async () => {
-      try {
-        const data = await fetchData("artists");
-        console.log("Fetched Artists:", data); // Debugging output
-        setArtists(data);
-      } catch (error) {
-        console.error("Error fetching artists:", error);
-      } finally {
-        setLoading(false); // Ensure loading is set to false after fetch
-      }
-    };
-
-    loadArtists();
-  }, []);
+  const { data: artists, loading, error } = useFetch("artists");
+  const [selectedArtistId, setSelectedArtistId] = useState(null); // State for selected artist ID
 
   return (
     <div
@@ -39,6 +22,8 @@ const ArtistView = () => {
         <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-20 p-4 overflow-y-auto">
           {loading ? (
             <Loading />
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
           ) : (
             <SortedList
               header="Artists"
@@ -107,30 +92,14 @@ const ArtistView = () => {
  * Fetches paintings from an API based on the provided artistId.
  */
 const Paintings = ({ artistId }) => {
-  const [paintings, setPaintings] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchPaintings = async () => {
-      setLoading(true);
-      try {
-        const data = await fetchData(`paintings/artist/${artistId}`);
-        setPaintings(data);
-      } catch (error) {
-        console.error("Error fetching paintings:", error);
-        setPaintings([]); // Ensure paintings is an empty array on error
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPaintings();
-  }, [artistId]);
+  const { data: paintings, loading, error } = useFetch(`paintings/artist/${artistId}`);
 
   return (
     <div>
       {loading ? (
         <Loading />
+      ) : error ? (
+        <p className="text-red-500">{error}</p>
       ) : paintings.length > 0 ? (
         paintings.map((painting) => (
           <div key={painting.paintingId}>

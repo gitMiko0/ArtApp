@@ -1,36 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
-import { fetchData } from "../services/apiServices.js";
+import useFetch from "../hooks/useFetch";
 
 const GalleryView = () => {
-  const [galleries, setGalleries] = useState([]);
+  const background = "/assets/paintingsBG.jpg";
+  const { data: galleries, loading, error } = useFetch("galleries");
   const [selectedGalleryId, setSelectedGalleryId] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadGalleries = async () => {
-      setLoading(true);
-      try {
-        const data = await fetchData("galleries");
-        console.log("Fetched Galleries:", data); // Debugging output
-        if (Array.isArray(data)) {
-          setGalleries(data);
-        }
-      } catch (error) {
-        console.error("Error fetching galleries:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadGalleries();
-  }, []);
-
-  const selectedGallery = galleries.find(
+  const selectedGallery = galleries?.find(
     (gallery) => gallery.galleryId === selectedGalleryId
   );
-
-  const background = "/assets/paintingsBG.jpg";
 
   return (
     <div
@@ -42,6 +22,8 @@ const GalleryView = () => {
         <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
           {loading ? (
             <Loading />
+          ) : error ? (
+            <p className="text-red-500">{error}</p>
           ) : (
             <SortedList
               header="Galleries"
@@ -59,7 +41,7 @@ const GalleryView = () => {
         <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
           <h2 className="font-bold font-alexbrush text-4xl mb-2">Gallery Details</h2>
           {selectedGallery ? (
-          <div className="p-4 bg-white bg-opacity-10 rounded-xl backdrop-blur">
+            <div className="p-4 bg-white bg-opacity-10 rounded-xl backdrop-blur">
               <p><strong>Name:</strong> {selectedGallery.galleryName}</p>
               <p><strong>Native Name:</strong> {selectedGallery.galleryNativeName}</p>
               <p><strong>City:</strong> {selectedGallery.galleryCity}</p>
