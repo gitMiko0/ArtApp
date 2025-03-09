@@ -5,14 +5,22 @@ import { fetchData } from "../services/apiServices.js";
 
 const GenreView = () => {
   const background = "/assets/jr-korpa-KMEiyRyHW74-unsplash.jpg";
-  const [genres, setGenres] = useState([]); // State to store artists
-  const [selectedGenreId, setSelectedGenreId] = useState(null); // State for selected artist ID
+  const [genres, setGenres] = useState([]); // State to store genres
+  const [selectedGenreId, setSelectedGenreId] = useState(null); // State for selected genre ID
+  const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     const loadGenres = async () => {
-      const data = await fetchData("genres");
-      console.log("Fetched Artists:", data); // Debugging output
-      setGenres(data);
+      try {
+        const data = await fetchData("genres");
+        console.log("Fetched Genres:", data); // Debugging output
+        setGenres(data);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+        setGenres([]);
+      } finally {
+        setLoading(false);
+      }
     };
 
     loadGenres();
@@ -24,24 +32,33 @@ const GenreView = () => {
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="flex h-full w-full">
-        {/* Left column - Artist list */}
+        {/* Left column - Genre list */}
         <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-10 p-4 overflow-y-auto">
-          <SortedList
-            header="Genres"
-            data={genres}
-            sortBy="genreName"
-            selectedId={selectedGenreId}
-            onItemClick={setSelectedGenreId}
-            itemKey="genreId"
-            renderItem={(genres) => `${genres.genreName}`}
-          />
+          {loading ? (
+            <Loading />
+          ) : (
+            <SortedList
+              header="Genres"
+              data={genres}
+              sortBy="genreName"
+              selectedId={selectedGenreId}
+              onItemClick={setSelectedGenreId}
+              itemKey="genreId"
+              renderItem={(genre) => `${genre.genreName}`}
+            />
+          )}
+        </div>
+
+        {/* Right column - Genre details */}
+        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 bg-gray-200 bg-opacity-10 p-4 overflow-y-auto flex flex-col">
+          <div className="h-3/12 bg-gray-200 bg-opacity-10 p-4">Header content</div>
+          <div className="h-9/12 bg-gray-200 bg-opacity-10 p-4 overflow-y-auto">
+            Scrolling content
+          </div>
         </div>
       </div>
     </div>
-  );};
+  );
+};
 
 export default GenreView;
-
-
-
-
