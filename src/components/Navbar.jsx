@@ -23,8 +23,8 @@ const Navbar = () => {
                 >
                   <span className="relative z-10">{item}</span>
                   <span
-                    className={`absolute bottom-2 left-0 w-full h-7 bg-[#21130d] transform transition-transform duration-300 ease-in-out 
-                      ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}
+                    className={`absolute left-0 w-full h-7 bg-[#21130d] transition-transform duration-300 ease-in-out 
+                      ${isActive ? 'scale-x-120' : 'scale-x-0 group-hover:scale-x-100'}`}
                   ></span>
                 </Link>
               </li>

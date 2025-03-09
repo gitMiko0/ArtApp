@@ -28,7 +28,7 @@ const ArtistView = () => {
     >
       <div className="flex h-full w-full">
         {/* Left column - Artist list */}
-        <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
+        <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-20 p-4 overflow-y-auto">
           <SortedList
             header="Artists"
             data={artists}
@@ -42,8 +42,8 @@ const ArtistView = () => {
 
 
         {/* Middle column - Artist details */}
-        <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-40 p-4 overflow-y-auto">
-          <h2 className="font-alexbrush text-2xl mb-2">Artist Details</h2>
+        <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-20 p-4 overflow-y-auto">
+          <h2 className="font-bold font-alexbrush text-2xl mb-2">Artist Details</h2>
           {selectedArtistId ? (
             <>
               {artists
@@ -81,7 +81,7 @@ const ArtistView = () => {
 
         {/* Right column - Paintings for the selected artist */}
         <div className="w-5/12 bg-gray-200 bg-opacity-50 p-4">
-          <h2 className="font-alexbrush text-2xl mb-2">Paintings</h2>
+          <h2 className="font-bold font-alexbrush text-2xl mb-2">Paintings</h2>
           {selectedArtistId ? (
            <Paintings artistId={selectedArtistId} />
           ) : (

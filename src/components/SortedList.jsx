@@ -25,17 +25,17 @@ const SortedList = ({
 }) => {
   return (
     <div>
-      <h2 className="font-alexbrush text-2xl mb-2">{header}</h2>
+      <h2 className="font-bold font-alexbrush text-2xl mb-2">{header}</h2>
       <ul>
         {data
           .sort((a, b) => a[sortBy].localeCompare(b[sortBy]))
           .map((item) => (
             <li
               key={item[itemKey]}
-              className={`rounded-xl cursor-pointer p-2 m-4 mb-2 rounded transition-colors duration-300  ${
+              className={`font-semibold rounded-xl cursor-pointer p-2 m-4 mb-2 rounded transition-colors duration-300  ${
                 selectedId === item[itemKey]
                   ? "rounded-xl bg-[#21130d] text-white"
-                  : "bg-white bg-opacity-20 -xl backdrop-blur hover:bg-[#21130d] hover:text-white"
+                  : "bg-white bg-opacity-30 backdrop-blur hover:bg-opacity-50 hover:bg-[#21130d] hover:text-white"
               }`}
               onClick={() => onItemClick(item[itemKey])}
             >
