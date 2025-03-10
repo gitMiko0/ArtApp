@@ -13,5 +13,10 @@ module.exports = {
       },
     },
   },
+  safelist: [
+    {
+      pattern: /grid-cols-(\d+)/, //safelisting to dynamically generate grid columns for PaintingsList
+    },
+  ],
   plugins: [],
 }

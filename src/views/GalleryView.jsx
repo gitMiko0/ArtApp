@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
 import LoadingFetch from "../hooks/useFetch";
+import PaintingsList from "../components/PaintingsList";
 
 const GalleryView = () => {
   const background = "/assets/paintingsBG.jpg";
@@ -64,8 +65,17 @@ const GalleryView = () => {
         </div>
 
         {/* Right column - Paintings Section */}
-        <div className="w-5/12 bg-gray-200 bg-opacity-50 p-4">
+        <div className="custom-scrollbar overflow-y-auto w-5/12 bg-gray-200 bg-opacity-50 p-4">
           <h2 className="font-bold font-alexbrush text-4xl mb-2">Paintings</h2>
+          {selectedGallery ? (
+            <PaintingsList 
+              queryType="gallery" 
+              queryValue={selectedGalleryId}
+              width="w-700" 
+            />
+          ) : (
+            <p className="font-quicksand">Select a gallery to view paintings.</p>
+          )}
         </div>
       </div>
     </div>

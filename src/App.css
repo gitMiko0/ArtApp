@@ -12,7 +12,7 @@
 /* Custom Scrollbar Styling -- Mainly for the autocomplete results, and possible other data that requires it. TailwinCSS doesn't seem to supoprt this.
   AFAIK this is also browser-specific. So far, this is tested and works with Chrome use as a class "custom-scrollbar" to apply to element. */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 4px; /* Thin scrollbar */
+    width: 5px; /* Thickness of scrollbar */
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
