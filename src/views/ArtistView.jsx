@@ -80,8 +80,7 @@ const ArtistView = () => {
               <PaintingsList 
                 queryType="artist" 
                 queryValue={selectedArtistId} 
-                size="w_400" 
-                artistId={selectedArtistId}
+                size="w_600" 
               />
             ) : (
               <p className="font-quicksand p-4">Select artist to view their paintings</p>

@@ -71,7 +71,7 @@ const GalleryView = () => {
             <PaintingsList 
               queryType="gallery" 
               queryValue={selectedGalleryId}
-              width="w-700" 
+              size="w_600" 
             />
           ) : (
             <p className="font-quicksand">Select a gallery to view paintings.</p>
