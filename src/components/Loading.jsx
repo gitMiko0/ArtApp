@@ -2,8 +2,9 @@ import React from "react";
 
 /**
  * Reusable Loading component for displaying a loading animation while waiting for data.
+ * This current implementation is a bit hardcoded, should be improved to adjust to screen height.
  */
-const Loading = ({ count = 12 }) => {
+const Loading = ({ count = 11 }) => {
     const placeholderDivs = [];
     for (let i = 0; i < count; i++) {
       placeholderDivs.push(

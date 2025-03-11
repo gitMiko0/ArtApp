@@ -10,13 +10,40 @@ const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
  *
  * @param {string} queryType - The type of query (e.g., "artist", "gallery", "search", "years").
  * @param {string|array} queryValue - The value associated with the query type.
- * @param {string} [size="w_200"] - The size of the painting image from Cloudinary.
- * @param {number} [columns=1] - The number of columns in the grid layout.
+ * @param {string} [size="w_200"] - The width size of the painting image from Cloudinary. Default 200
+ * @param {number} [columns=1] - The number of columns in the grid layout. Default 1
+ * @param {string} [defaultSort="sortByTitle"] - The default sort option for the paintings. Default "sortByTitle"
+ * @returns {JSX.Element} PaintingsList component
  */
-const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1 }) => {
+const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, defaultSort = "sortByTitle"}) => {
   const [paintings, setPaintings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortOption, setSortOption] = useState(defaultSort); // default initial state is sorted by Title
+  const [sortedPaintings, setSortedPaintings] = useState([]);
+
+  useEffect(() => {
+    const sortPaintings = (paintings) => {
+      return [...paintings].sort((a, b) => {
+        switch (sortOption) {
+          case "sortByArtist": 
+            return (a.artistName || "").localeCompare(b.artistName || "");
+          case "sortByTitle": 
+            return (a.title || "").localeCompare(b.title || "");
+          case "sortByGallery": 
+            return (a.galleryName || "").localeCompare(b.galleryName || "");
+          case "sortByYear": 
+            return (a.yearOfWork || 0) - (b.yearOfWork || 0);
+          default: 
+            return 0;
+        }
+      });
+    };
+  
+    setSortedPaintings(sortPaintings(paintings));
+  }, [paintings, sortOption]); // Runs whenever paintings or sortOption changes
+  
+
 
   useEffect(() => {
     const loadPaintings = async () => {
@@ -72,7 +99,16 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1 }) =
 
   return (
     <div className={`grid ${gridTemplateColumns} gap-4 p-2`}>
-      {paintings.map((painting) => (
+      <select className="w-4/12 font-quicksand text-white bg-[#ae752f] p-2 pl-4 rounded-xl"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+      >
+        <option value="sortByArtist">Artist</option>
+        <option value="sortByTitle">Title</option>
+        <option value="sortByGallery">Gallery</option>
+        <option value="sortByYear">Year</option>
+      </select>
+      {sortedPaintings.map((painting) => ( // Display all paintings fetched
         <div
           key={painting.paintingId}
           className="font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow"

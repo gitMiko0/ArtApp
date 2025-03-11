@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 backdrop-blur">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="font-waterfall flex items-center text-white text-4xl">
-          <img src="/assets/logo.png" alt="logo" className="h-12 w-12 mr-2" />
+          <img src="/assets/logo.png" alt="logo" className="h-12 w-12 m-2 mt-0 mb-0" />
           Elysiana
         </Link>
         <ul className="flex space-x-8"> {/* navbar items animation credit: https://getdevdone.com/blog/our-favorite-navigation-menu-effects.html */}

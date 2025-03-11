@@ -12,9 +12,12 @@ const PaintingView = () => {
     >
       <div className="flex w-4/12">
       </div>
-      <div className="font-quicksand custom-scrollbar w-9/12 bg-gray-200 bg-opacity-20 p-4 overflow-y-auto">
+      <div className="font-quicksand custom-scrollbar w-9/12  p-4 overflow-y-auto">
+      </div>
+      <div className="font-quicksand custom-scrollbar w-9/12 p-4 overflow-y-auto">
       </div>
     </div>
+    
   );
 };
 
