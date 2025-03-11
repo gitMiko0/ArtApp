@@ -2,14 +2,14 @@ import React from 'react';
 /**
  * A reusable component for displaying a sorted list of items.
  * 
- * @param {Object} props - Component properties
- * @param {string} props.header - The title of the list
- * @param {Array} props.data - The array of items to be displayed
- * @param {string} props.sortBy - The property name to sort the items by
- * @param {any} props.selectedId - The ID of the currently selected item
- * @param {Function} props.onItemClick - Function to call when an item is clicked
- * @param {string} props.itemKey - The property name to use as the unique key for each item
- * @param {Function} props.renderItem - A function that defines how each item should be rendered
+ * @param {Object} - Component properties
+ * @param {string} header - The title of the list
+ * @param {Array} data - The array of items to be displayed
+ * @param {string} sortBy - The property name to sort the items by
+ * @param {any} selectedId - The ID of the currently selected item
+ * @param {Function} onItemClick - Function to call when an item is clicked
+ * @param {string} itemKey - The property name to use as the unique key for each item
+ * @param {Function} renderItem - A function that defines how each item should be rendered
  * 
  * @returns {JSX.Element} The sorted list component
  */
