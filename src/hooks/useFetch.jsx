@@ -3,7 +3,7 @@ import { fetchData } from "../services/apiServices.js";
 
 /*
     Handle states for fetches in order to simplify loading screens and error handling
-    in all views.
+    for the SortedList component, which is used in all views.
 */
 const LoadingFetch = (endpoint) => {
   const [data, setData] = useState([]);

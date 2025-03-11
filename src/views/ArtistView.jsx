@@ -19,7 +19,7 @@ const ArtistView = () => {
     >
       <div className="flex h-full w-full">
         {/* Left column - Artist list */}
-        <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-20 p-4 overflow-y-auto">
+        <div className="font-quicksand custom-scrollbar w-3/12 p-4 overflow-y-auto">
           {loading ? (
             <Loading />
           ) : error ? (
@@ -38,8 +38,8 @@ const ArtistView = () => {
         </div>
 
         {/* Middle column - Artist details */}
-        <div className="font-quicksand custom-scrollbar w-4/12 bg-gray-200 bg-opacity-20 p-4 overflow-y-auto">
-          <h2 className="font-bold font-alexbrush text-4xl mb-2">Artist Details</h2>
+        <div className="font-quicksand custom-scrollbar w-4/12 p-4 overflow-y-auto">
+          <h2 className="text-shadow-lg text-white font-alexbrush text-4xl mb-2">Artist Details</h2>
           {selectedArtistId ? (
             artists
               .filter((artist) => artist.artistId === selectedArtistId)
@@ -62,7 +62,7 @@ const ArtistView = () => {
                   </p>
                   <a
                     href={artist.artistLink}
-                    className="inline-block text-white bg-[#ae752f] p-2 mt-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+                    className="inline-block text-white bg-[#ae752f] pt-1 pb-1 p-2 mt-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
                   >
                     Learn more
                   </a>
@@ -74,8 +74,8 @@ const ArtistView = () => {
         </div>
 
         {/* Right column - Paintings for the selected artist */}
-        <div className="custom-scrollbar w-5/12 bg-gray-200 bg-opacity-20 overflow-y-auto">
-        <h2 className="font-bold font-alexbrush text-4xl mt-4 mb-0">Paintings</h2>
+        <div className="custom-scrollbar w-5/12 overflow-y-auto">
+        <h2 className="text-shadow-lg text-white font-alexbrush text-4xl mt-4 mb-0">Paintings</h2>
           {selectedArtistId ? (
               <PaintingsList 
                 queryType="artist" 

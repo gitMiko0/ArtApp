@@ -25,7 +25,7 @@ const SortedList = ({
 }) => {
   return (
     <div>
-      <h2 className="font-bold font-alexbrush text-4xl">{header}</h2>
+      <h2 className="text-white text-shadow-lg font-alexbrush text-4xl">{header}</h2>
       <ul>
         {data
           .sort((a, b) => a[sortBy].localeCompare(b[sortBy]))

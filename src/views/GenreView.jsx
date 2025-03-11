@@ -72,12 +72,12 @@ const GenreView = () => {
                   {selectedGenre.genreName} 
                   <a
                     href={selectedGenre.wikiLink}
-                    className="items-right font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+                    className="items-right font-quicksand text-xs inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
                   >
                     Learn more
                   </a>
                 </h2>
-                <div className="custom-scrollbar max-h-40 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
+                <div className="p-4 custom-scrollbar max-h-40 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
                   <strong>Description:</strong> {selectedGenre.description}
                 </div>
               </div>

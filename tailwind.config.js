@@ -1,4 +1,5 @@
-/** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
+
 module.exports = {
   content: [
     './src/**/*.{html,js,jsx,ts,tsx}',
@@ -15,8 +16,22 @@ module.exports = {
   },
   safelist: [
     {
-      pattern: /grid-cols-(\d+)/, //safelisting to dynamically generate grid columns for PaintingsList
+      pattern: /grid-cols-(\d+)/,
     },
   ],
-  plugins: [],
-}
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.text-shadow': {
+          'text-shadow': '3px 3px 6px rgba(0, 0, 0, 0.7)',
+        },
+        '.text-shadow-md': {
+          'text-shadow': '5px 5px 10px rgba(0, 0, 0, 0.8)',
+        },
+        '.text-shadow-lg': {
+          'text-shadow': '8px 8px 16px rgba(0, 0, 0, 0.9)',
+        },
+      });
+    }),
+  ],
+};
