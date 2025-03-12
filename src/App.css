@@ -11,18 +11,20 @@
 
 /* Custom Scrollbar Styling -- Mainly for the autocomplete results, and possible other data that requires it. TailwinCSS doesn't seem to supoprt this.
   AFAIK this is also browser-specific. So far, this is tested and works with Chrome use as a class "custom-scrollbar" to apply to element. */
-  .custom-scrollbar::-webkit-scrollbar {
-    width: 5px; /* Thickness of scrollbar */
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-track {
-    background: transparent; /* No background */
-    border-radius: 40px; /* Ensures the scrollbar stays rounded */
-  }
-  
-  .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #21130d;
-    border-radius: 40px;
-  }
+  /* Custom Scrollbar Styling with Glassmorphism */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Slightly thicker for better visibility */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4); /* Frosted glass thumb */
+  border-radius: 40px;
+  backdrop-filter: blur(2px); /* Extra blur for the thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.6); /* Slightly brighter on hover */
+}
+
 
 /* -- End: Custom Scrollbar Styling --*/

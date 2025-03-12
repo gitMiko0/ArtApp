@@ -86,7 +86,7 @@ const GenreView = () => {
             )}
           </div>
           {/* Paintings for the selected genre */}
-          <div className="custom-scrollbar  h-9/12 p-4 overflow-y-auto">
+          <div className="custom-scrollbar  h-9/12 p-4">
             {selectedGenreId ? (
                <PaintingsList
                queryType="genres"

@@ -42,7 +42,7 @@ const GalleryView = () => {
         <div className="font-quicksand custom-scrollbar w-4/12 p-4 overflow-y-auto">
           <h2 className="text-white text-shadow-lg font-alexbrush text-4xl">Gallery Details</h2>
           {selectedGallery ? (
-            <div className="p-4 bg-white bg-opacity-10 rounded-xl backdrop-blur">
+            <div className="p-4 bg-white bg-opacity-30 rounded-xl backdrop-blur">
               <p><strong>Name:</strong> {selectedGallery.galleryName}</p>
               <p><strong>Native Name:</strong> {selectedGallery.galleryNativeName}</p>
               <p><strong>City:</strong> {selectedGallery.galleryCity}</p>
@@ -65,8 +65,8 @@ const GalleryView = () => {
         </div>
 
         {/* Right column - Paintings Section */}
-        <div className="custom-scrollbar overflow-y-auto w-5/12 p-4">
-          <h2 className="text-white text-shadow-lg font-alexbrush text-4xl">Paintings</h2>
+        <div className="custom-scrollbar min-h-0 w-5/12 p-4">
+          <h2 className="text-white min-h-0 text-shadow-lg font-alexbrush text-4xl">Paintings</h2>
           {selectedGallery ? (
             <PaintingsList 
               queryType="gallery" 

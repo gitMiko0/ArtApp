@@ -98,12 +98,12 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   const gridTemplateColumns = `grid-cols-${columns}` // Constructing the Tailwind class
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full">
     {/* Sorting Header - Stays at the Top */}
     <div className="sticky top-0 pb-1 flex justify-end items-center">
       <h1 className="font-quicksand mr-2">Sort Paintings By:</h1>
       <select
-        className="w-4/12 font-quicksand text-white bg-[#ae752f] p-2 pl-4 rounded-xl"
+        className="w-3/12 font-quicksand text-white bg-[#ae752f] p-1 rounded-xl"
         value={sortOption}
         onChange={(e) => setSortOption(e.target.value)}
       >
@@ -115,28 +115,33 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
     </div>
   
     {/* Paintings Grid - Even Height & Scrollable */}
-    <div className={`custom-scrollbar grid ${gridTemplateColumns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+    <div className={`pb-20 m-0 custom-scrollbar grid ${gridTemplateColumns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
       {sortedPaintings.map((painting) => (
         <div
-          key={painting.paintingId}
-          className="mr-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full"
-        >
+        key={painting.paintingId}
+        className="mr-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full"
+      >
+        <div className="h-80 flex justify-center items-center">
           <img
             src={`${CLOUDINARY_BASE_URL}/${size}/art/paintings/${painting.imageFileName}`}
             alt={painting.title}
-            className="w-full h-64 object-cover rounded"
+            className="max-h-full max-w-full object-contain rounded"
           />
-          <h3 className="text-lg font-bold mt-2">{painting.title}</h3>
-          <p className="text-sm text-bg-[#21130d]">{painting.medium}</p>
-          <p className="text-sm"><strong>Year:</strong> {painting.yearOfWork}</p>
-          <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>
-          <a
-            href={painting.wikiLink}
-            className="mt-auto font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 m-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
-          >
-            Learn more
-          </a>
         </div>
+        
+        <h3 className="text-lg font-bold mt-2">{painting.title}</h3>
+        <p className="text-sm text-bg-[#21130d]">{painting.medium}</p>
+        <p className="text-sm"><strong>Year:</strong> {painting.yearOfWork}</p>
+        <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>
+        <a
+          href={painting.wikiLink}
+          className="w-1/2 mx-auto mt-auto font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-4 m-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+        >
+          Learn more
+        </a>
+
+      </div>
+      
       ))}
     </div>
   </div>
