@@ -91,14 +91,14 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
     loadPaintings();
   }, [queryType, queryValue]);
 
-  if (loading) return <p>Loading paintings...</p>
+  if (loading) return <LoadingSkeleton columns={columns} />
   if (error) return <p>Error: {error}</p>
   if (!paintings.length) return <p>No paintings found.</p>
 
   const gridTemplateColumns = `grid-cols-${columns}` // Constructing the Tailwind class
 
   return (
-    <div className="h-full">
+    <div className="m-2 h-full">
     {/* Sorting Header - Stays at the Top */}
     <div className="sticky top-0 pb-1 flex justify-end items-center">
       <h1 className="font-quicksand mr-2">Sort Paintings By:</h1>
@@ -146,6 +146,23 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
     </div>
   </div>
   
+  );
+};
+
+const LoadingSkeleton = ({ columns }) => {
+  return (
+    <div className={`pb-20 m-2 mt-10 custom-scrollbar grid grid-cols-${columns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+      {Array.from({ length: columns * 3 }).map((_, index) => (
+        <div key={index} className="mr-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full animate-pulse">
+          <div className="h-80 bg-opacity-50 backdrop-blur bg-gray-400 rounded"></div>
+          <div className="h-6 bg-opacity-50 backdrop-blur bg-gray-400 rounded mt-2"></div>
+          <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-400 rounded mt-2 w-3/4"></div>
+          <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-400 rounded mt-2 w-1/2"></div>
+          <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-400 rounded mt-2 w-full"></div>
+          <div className="w-1/2 h-8 bg-gray-300 rounded-xl mt-auto mx-auto"></div>
+        </div>
+      ))}
+    </div>
   );
 };
 
