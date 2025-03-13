@@ -63,7 +63,7 @@ const GenreView = () => {
         </div>
 
         {/* Right column - Genre details */}
-        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 bg-gray-200 bg-opacity-10 overflow-y-auto flex flex-col">
+        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 bg-gray-200 bg-opacity-10 overflow-y-auto">
           <div className="h-3/12 max-h-3/12">
             {/* Genre details shown here */}
             {selectedGenre ? (
@@ -85,9 +85,9 @@ const GenreView = () => {
               <p className="h-40 font-quicksand p-4">Select a genre to see details.</p>
             )}
           </div>
-          
+
           {/* Paintings for the selected genre */}
-          <div className="custom-scrollbar h-9/12">
+          <div>
             {selectedGenreId ? (
                <PaintingsList
                queryType="genres"

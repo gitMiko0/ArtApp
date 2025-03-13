@@ -11,7 +11,7 @@ const PaintingView = () => {
 
   return (
     <div
-      className="pt-12 flex h-screen w-screen bg-cover bg-center"
+      className="pt-12 flex h-screen w-screen bg-cover bg-center overflow-y-auto"
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="flex w-3/12">
@@ -22,8 +22,7 @@ const PaintingView = () => {
           setFilterValue={setFilterValue}
         />
       </div>
-      <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
-        <div>
+      <div className="font-quicksand custom-scrollbar w-9/12">
           <PaintingsList 
             queryType={filterType}
             queryValue={filterValue}
@@ -32,7 +31,6 @@ const PaintingView = () => {
             size="w_900"
             columns={3}
           />
-        </div>
       </div>
     </div>
   );
