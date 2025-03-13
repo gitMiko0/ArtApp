@@ -100,7 +100,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   return (
     <div className="m-2 mr-2 mt-0 h-full">
       {/* Sorting Header - Stays at the Top */}
-      <div className="w-96 ml-auto m-2 backdrop-blur bg-white rounded-xl bg-opacity-30 sticky top-2 p-1 w-auto z-20 flex justify-end items-center">
+      <div className="w-80 ml-auto m-2 backdrop-blur bg-white rounded-xl bg-opacity-30 sticky top-2 p-1 w-auto z-20 flex justify-end items-center">
             <h1 className="text-white font-quicksand mr-2">Sort Paintings By:</h1>
             <select
               className="w-1/2 font-quicksand text-white bg-[#ae752f] m-1 p-1 rounded-xl"

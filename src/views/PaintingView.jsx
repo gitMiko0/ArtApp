@@ -22,15 +22,17 @@ const PaintingView = () => {
           setFilterValue={setFilterValue}
         />
       </div>
-      <div className="font-quicksand custom-scrollbar w-9/12">
-        <PaintingsList 
-          queryType={filterType}
-          queryValue={filterValue}
-          defaultSort={sortOption}
-          setSortOption={setSortOption}
-          size="w_900"
-          columns={3}
-        />
+      <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
+        <div>
+          <PaintingsList 
+            queryType={filterType}
+            queryValue={filterValue}
+            defaultSort={sortOption}
+            setSortOption={setSortOption}
+            size="w_900"
+            columns={3}
+          />
+        </div>
       </div>
     </div>
   );
