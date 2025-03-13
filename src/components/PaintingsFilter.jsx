@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { fetchData } from "../services/apiServices";
 
-const PaintingsFilter = ({ filterType, setFilterType, filterValue, setFilterValue, setSearchTerm }) => {
+const PaintingsFilter = ({ filterType, setFilterType, filterValue, searchTerm, setFilterValue, setSearchTerm }) => {
     const [artistsList, setArtistsList] = useState([]);
     const [galleriesList, setGalleriesList] = useState([]);
-  
+
     useEffect(() => {
       const fetchFilters = async () => {
         const [artistsData, galleriesData] = await Promise.all([
@@ -19,12 +19,18 @@ const PaintingsFilter = ({ filterType, setFilterType, filterValue, setFilterValu
   
     return (
       <div className="p-4">
-        <input
-          type="text"
-          placeholder="Search by painting title..."
-          onChange={(e) => setSearchTerm(e.target.value.toLowerCase())}
-          className="border p-2 rounded w-full"
+       <input
+        type="text"
+        placeholder="Search by title..."
+        onKeyDown={(e) => {
+            if (e.key === "Enter") {
+            setFilterType("search");
+            setFilterValue(e.target.value);
+            }
+        }}
+        value={searchTerm}
         />
+
   
         <h2 className="text-lg font-bold mb-4">Filter By:</h2>
   

@@ -90,7 +90,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
 
     loadPaintings();
   }, [queryType, queryValue]);
-
+  
   if (loading) return <LoadingSkeleton columns={columns} />
   if (error) return <p>Error: {error}</p>
   if (!paintings.length) return <p>No paintings found.</p>
@@ -115,13 +115,13 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
     </div>
   
     {/* Paintings Grid - Even Height & Scrollable */}
-    <div className={`pb-20 m-0 custom-scrollbar grid ${gridTemplateColumns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+    <div className={`pb-20 m-0 custom-scrollbar grid ${gridTemplateColumns} gap-2 gap-y-4 overflow-y-auto h-full grid-auto-rows-fr`}>
       {sortedPaintings.map((painting) => (
         <div
         key={painting.paintingId}
         className="mr-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full"
       >
-        <div className="h-80 flex justify-center items-center">
+        <div className="h-90 flex justify-center items-center">
           <img
             src={`${CLOUDINARY_BASE_URL}/${size}/art/paintings/${painting.imageFileName}`}
             alt={painting.title}
@@ -139,13 +139,10 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
         >
           Learn more
         </a>
-
-      </div>
-      
+      </div> 
       ))}
     </div>
   </div>
-  
   );
 };
 

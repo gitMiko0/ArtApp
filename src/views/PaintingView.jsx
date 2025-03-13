@@ -7,14 +7,14 @@ const PaintingView = () => {
 
   const [filterType, setFilterType] = useState("artist"); // artist, genre, or gallery
   const [filterValue, setFilterValue] = useState("");
-  const [sortOption, setSortOption] = useState("sortByTitle");
+  const [sortOption, setSortOption] = useState("sortByTitle"); //initial state
 
   return (
     <div
       className="pt-12 flex h-screen w-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${background})` }}
     >
-      <div className="flex w-4/12">
+      <div className="flex w-3/12">
         <PaintingsFilter 
           filterType={filterType}
           setFilterType={setFilterType}
@@ -28,7 +28,8 @@ const PaintingView = () => {
           queryValue={filterValue}
           defaultSort={sortOption}
           setSortOption={setSortOption}
-          columns={2}
+          size="w_900"
+          columns={3}
         />
       </div>
     </div>
