@@ -108,6 +108,12 @@ const PaintingsFilter = ({ filterType, setFilterType, filterValue, searchTerm, s
           value={filterType === "years" ? filterValue[1] || "" : ""}
         />
       </form>
+      <button>
+        Clear
+      </button>
+      <button>
+        Filter
+      </button>
     </div>
   );
 };
