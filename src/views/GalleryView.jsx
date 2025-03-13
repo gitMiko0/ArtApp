@@ -5,7 +5,8 @@ import LoadingFetch from "../hooks/useFetch";
 import PaintingsList from "../components/PaintingsList";
 
 const GalleryView = () => {
-  const background = "/assets/paintingsBG.jpg";
+  //const background = "/assets/paintingsBG.jpg";
+  const background = "/assets/loginBackground.jpg";
   const { data: galleries, loading, error } = LoadingFetch("galleries");
   const [selectedGalleryId, setSelectedGalleryId] = useState(null);
 
@@ -18,7 +19,7 @@ const GalleryView = () => {
       className="pt-12 flex h-screen w-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${background})` }}
     >
-      <div className="flex h-full w-full bg-black bg-opacity-40">
+      <div className="flex h-full w-full">
         {/* Left column - Gallery List */}
         <div className="font-quicksand custom-scrollbar w-3/12 p-4 overflow-y-auto">
           {loading ? (
@@ -65,17 +66,19 @@ const GalleryView = () => {
         </div>
 
         {/* Right column - Paintings Section */}
-        <div className="custom-scrollbar min-h-0 w-5/12 p-4">
-          <h2 className="text-white min-h-0 text-shadow-lg font-alexbrush text-4xl">Paintings</h2>
-          {selectedGallery ? (
-            <PaintingsList 
-              queryType="gallery" 
-              queryValue={selectedGalleryId}
-              size="w_600" 
-            />
-          ) : (
-            <p className="font-quicksand">Select a gallery to view paintings.</p>
-          )}
+        <div className="custom-scrollbar min-h-0 w-5/12 overflow-y-auto">
+          <h2 className="text-white text-shadow-lg font-alexbrush text-4xl pt-4">Paintings</h2>
+            <div>
+              {selectedGallery ? (
+                <PaintingsList 
+                  queryType="gallery" 
+                  queryValue={selectedGalleryId}
+                  size="w_600" 
+                />
+              ) : (
+                <p className="font-quicksand">Select a gallery to view paintings.</p>
+              )}
+            </div>
         </div>
       </div>
     </div>

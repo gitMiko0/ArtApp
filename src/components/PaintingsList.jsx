@@ -98,24 +98,24 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   const gridTemplateColumns = `grid-cols-${columns}` // Constructing the Tailwind class
 
   return (
-    <div className="m-2 h-full">
-    {/* Sorting Header - Stays at the Top */}
-    <div className="sticky top-0 pb-1 flex justify-end items-center">
-      <h1 className="font-quicksand mr-2">Sort Paintings By:</h1>
-      <select
-        className="w-3/12 font-quicksand text-white bg-[#ae752f] m-1 p-1 rounded-xl"
-        value={sortOption}
-        onChange={(e) => setSortOption(e.target.value)}
-      >
-        <option value="sortByArtist">Artist</option>
-        <option value="sortByTitle">Title</option>
-        <option value="sortByGallery">Gallery</option>
-        <option value="sortByYear">Year</option>
-      </select>
-    </div>
+    <div className="m-2 mr-2 mt-0 h-full">
+      {/* Sorting Header - Stays at the Top */}
+      <div className="w-96 ml-auto m-2 backdrop-blur bg-white rounded-xl bg-opacity-30 sticky top-2 p-1 w-auto z-20 flex justify-end items-center">
+            <h1 className="text-white font-quicksand mr-2">Sort Paintings By:</h1>
+            <select
+              className="w-1/2 font-quicksand text-white bg-[#ae752f] m-1 p-1 rounded-xl"
+              value={sortOption}
+              onChange={(e) => setSortOption(e.target.value)}
+            >
+              <option value="sortByArtist">Artist</option>
+              <option value="sortByTitle">Title</option>
+              <option value="sortByGallery">Gallery</option>
+              <option value="sortByYear">Year</option>
+            </select>
+      </div>
   
     {/* Paintings Grid - Even Height & Scrollable */}
-    <div className={`pb-20 m-0 custom-scrollbar grid ${gridTemplateColumns} gap-2 gap-y-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+    <div className={`pb-20 custom-scrollbar grid ${gridTemplateColumns} gap-2 gap-y-4 overflow-y-auto h-full grid-auto-rows-fr`}>
       {sortedPaintings.map((painting) => (
         <div
         key={painting.paintingId}

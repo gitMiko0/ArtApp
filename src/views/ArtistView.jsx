@@ -74,18 +74,24 @@ const ArtistView = () => {
         </div>
 
         {/* Right column - Paintings for the selected artist */}
-        <div className="custom-scrollbar w-5/12 pb-12 min-h-0">
-        <h2 className="text-shadow-lg text-white font-alexbrush text-4xl mt-4 mb-0">Paintings</h2>
+        <div className="custom-scrollbar w-5/12 h-9/12 overflow-y-auto">
+          <h2 className="text-shadow-lg text-white font-alexbrush text-4xl mt-4 mb-0">
+            Paintings
+          </h2>
+          <div>
           {selectedArtistId ? (
-              <PaintingsList 
-                queryType="artist" 
-                queryValue={selectedArtistId} 
-                size="w_600" 
-              />
-            ) : (
-              <p className="font-quicksand p-4">Select artist to view their paintings</p>
-            )}          
+            <PaintingsList 
+              queryType="artist" 
+              queryValue={selectedArtistId} 
+              size="w_600" 
+            />
+          ) : (
+            <p className="font-quicksand p-4">Select an artist to view their paintings</p>
+          )}          
+          </div>
         </div>
+
+
       </div>
     </div>
   );

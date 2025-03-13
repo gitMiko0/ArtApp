@@ -5,8 +5,8 @@ import PaintingsList from "../components/PaintingsList.jsx";
 import { fetchData } from "../services/apiServices.js";
 
 const GenreView = () => {
-  const background = "/assets/jr-korpa-KMEiyRyHW74-unsplash.jpg";
-  //const background = "/assets/loginBackground.jpg";
+  //const background = "/assets/jr-korpa-KMEiyRyHW74-unsplash.jpg";
+  const background = "/assets/loginBackground.jpg";
   const [genres, setGenres] = useState([]); // State to store genres
   const [selectedGenreId, setSelectedGenreId] = useState(null); // State for selected genre ID
   const [selectedGenre, setSelectedGenre] = useState(null); // State for selected genre details
@@ -68,7 +68,7 @@ const GenreView = () => {
             {/* Genre details shown here */}
             {selectedGenre ? (
               <div className="flex justify-between items-center">
-                <h2 className="font-bold m-2 font-alexbrush text-2xl">
+                <h2 className="text-shadow text-white font-bold m-2 font-alexbrush text-2xl">
                   {selectedGenre.genreName} 
                   <a
                     href={selectedGenre.wikiLink}
@@ -85,8 +85,9 @@ const GenreView = () => {
               <p className="h-40 font-quicksand p-4">Select a genre to see details.</p>
             )}
           </div>
+          
           {/* Paintings for the selected genre */}
-          <div className="custom-scrollbar  h-9/12 p-4">
+          <div className="custom-scrollbar h-9/12">
             {selectedGenreId ? (
                <PaintingsList
                queryType="genres"
