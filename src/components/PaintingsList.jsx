@@ -103,7 +103,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
     <div className="sticky top-0 pb-1 flex justify-end items-center">
       <h1 className="font-quicksand mr-2">Sort Paintings By:</h1>
       <select
-        className="w-3/12 font-quicksand text-white bg-[#ae752f] p-1 rounded-xl"
+        className="w-3/12 font-quicksand text-white bg-[#ae752f] m-1 p-1 rounded-xl"
         value={sortOption}
         onChange={(e) => setSortOption(e.target.value)}
       >
@@ -149,9 +149,17 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   );
 };
 
+/**
+ * A reusable component for displaying a grid of skeleton loading placeholders.
+ * The number of columns is determined by the "columns" prop.
+ * The component renders a grid of gray placeholder boxes with a pulse animation.
+ * @param {Object} props - Component properties
+ * @param {number} props.columns - The number of columns for the grid
+ * @returns {JSX.Element} The LoadingSkeleton component
+ */
 const LoadingSkeleton = ({ columns }) => {
   return (
-    <div className={`pb-20 m-2 mt-10 custom-scrollbar grid grid-cols-${columns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+    <div className={`pb-20 p-2 mt-10 custom-scrollbar grid grid-cols-${columns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
       {Array.from({ length: columns * 3 }).map((_, index) => (
         <div key={index} className="mr-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full animate-pulse">
           <div className="h-80 bg-opacity-50 backdrop-blur bg-gray-400 rounded"></div>

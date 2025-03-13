@@ -74,7 +74,7 @@ const ArtistView = () => {
         </div>
 
         {/* Right column - Paintings for the selected artist */}
-        <div className="custom-scrollbar w-5/12">
+        <div className="custom-scrollbar w-5/12 pb-12 min-h-0">
         <h2 className="text-shadow-lg text-white font-alexbrush text-4xl mt-4 mb-0">Paintings</h2>
           {selectedArtistId ? (
               <PaintingsList 
