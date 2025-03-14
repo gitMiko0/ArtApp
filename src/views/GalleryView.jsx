@@ -10,7 +10,7 @@ const GalleryView = () => {
   const { data: galleries, loading, error } = LoadingFetch("galleries");
   const [selectedGalleryId, setSelectedGalleryId] = useState(null);
 
-  const selectedGallery = galleries?.find(
+  const selectedGallery = galleries?.find( // better than fetching
     (gallery) => gallery.galleryId === selectedGalleryId
   );
 
