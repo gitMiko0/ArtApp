@@ -8,6 +8,7 @@ const PaintingView = () => {
   const [filterType, setFilterType] = useState("artist"); // artist, genre, or gallery
   const [filterValue, setFilterValue] = useState("");
   const [sortOption, setSortOption] = useState("sortByTitle"); //initial state
+  const [appliedFilter, setAppliedFilter] = useState({});
 
   return (
     <div
@@ -16,16 +17,13 @@ const PaintingView = () => {
     >
       <div className="flex w-3/12">
         <PaintingsFilter 
-          filterType={filterType}
-          setFilterType={setFilterType}
-          filterValue={filterValue}
-          setFilterValue={setFilterValue}
+          setAppliedFilter={setAppliedFilter}
         />
       </div>
       <div className="font-quicksand custom-scrollbar w-9/12">
           <PaintingsList 
-            queryType={filterType}
-            queryValue={filterValue}
+            queryType={appliedFilter.type}
+            queryValue={appliedFilter.value}
             defaultSort={sortOption}
             setSortOption={setSortOption}
             size="w_900"

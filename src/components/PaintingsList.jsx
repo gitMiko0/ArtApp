@@ -69,6 +69,9 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
               route = `paintings/years/${queryValue[0]}/${queryValue[1]}`;
             }
             break;
+          case "all":
+            route = "paintings";
+            break;
           default:
             console.warn("Invalid queryType:", queryType);
             setError("Invalid query type.");

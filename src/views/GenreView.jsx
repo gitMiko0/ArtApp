@@ -46,7 +46,7 @@ const GenreView = () => {
     >
       <div className="flex h-full w-full">
         {/* Left column - Genre list */}
-        <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-10 p-4 overflow-y-auto">
+        <div className="font-quicksand custom-scrollbar w-3/12 p-4 overflow-y-auto">
           {loading ? (
             <Loading />
           ) : (
@@ -63,7 +63,7 @@ const GenreView = () => {
         </div>
 
         {/* Right column - Genre details */}
-        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 bg-gray-200 bg-opacity-10 overflow-y-auto">
+        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 overflow-y-auto">
           <div className="h-3/12 max-h-3/12">
             {/* Genre details shown here */}
             {selectedGenre ? (
