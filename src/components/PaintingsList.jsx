@@ -140,15 +140,17 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
             <p className="text-sm"><strong>Year:</strong> {painting.yearOfWork}</p>
             <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>
           </div>
-        {painting.wikiLink ? (
-        <a
-          href={painting.wikiLink}
-          className="mt-2 w-1/2 mx-auto mt-auto m-0 font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-4 m-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
-        >
-          Learn more
-        </a> ) : (
-          <span className="mx-auto mt-auto font-quicksand text-black italic">No wiki available</span>
-        )}
+        <div className="mt-auto">
+          {painting.wikiLink ? (
+          <a
+            href={painting.wikiLink}
+            className="w-1/2 mx-auto mt-auto m-0 font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+          >
+            Learn more
+          </a> ) : (
+            <span className="font-quicksand text-black italic">Wikipedia Unavailable</span>
+          )}
+        </div>
       </div> 
       ))}
     </div>

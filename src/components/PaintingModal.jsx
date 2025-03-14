@@ -57,20 +57,24 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
           </div>
 
           {/* Action Buttons */}
-          <div className="mt-2 flex gap-4 justify-center">
+          <div className="font-quicksand mb-4 mt-2 flex gap-4 justify-center translate-y-4 animate-fade-in">
             <button
-              onClick={onClose}
-              className="px-4 py-2 bg-gray-300 hover:bg-gray-400 rounded-lg"
+            onClick={onClose}
+            className="relative px-4 py-2 bg-slate-500 text-black rounded-lg overflow-hidden group transition-colors duration-300 ease-in-out"
             >
-              Close
+            <span className="absolute inset-0 bg-red-900 scale-x-0 origin-center transition-transform duration-300 ease-in-out group-hover:scale-x-100 z-0"></span>
+            <span className="relative z-10 text-white">Close</span>
             </button>
+
             <button
-              onClick={() => onAddToFavorites(painting)}
-              className="px-4 py-2 bg-blue-500 text-white hover:bg-blue-600 rounded-lg"
+            className="relative px-4 py-2 bg-[#ae752f] text-white rounded-lg overflow-hidden group transition-colors duration-300 ease-in-out"
+            onClick={() => onAddToFavorites(painting)}
             >
-              Add to Favorites
+            <span className="absolute inset-0 bg-[#21130d] scale-x-0 origin-center transition-transform duration-300 ease-in-out group-hover:scale-x-100 z-0"></span>
+            <span className="relative z-10">Add to Favorites</span>
             </button>
-          </div>
+  
+            </div>
         </div>
       </div>
     </Modal>
