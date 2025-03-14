@@ -159,7 +159,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
  */
 const LoadingSkeleton = ({ columns }) => {
   return (
-    <div className={`pb-20 p-2 mt-10 custom-scrollbar grid grid-cols-${columns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+    <div className={`pb-20 p-2 mt-14 custom-scrollbar grid grid-cols-${columns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
       {Array.from({ length: columns * 3 }).map((_, index) => (
         <div key={index} className="mr-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full animate-pulse">
           <div className="h-80 bg-opacity-50 backdrop-blur bg-gray-400 rounded"></div>
