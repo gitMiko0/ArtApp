@@ -10,11 +10,11 @@ const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
  *
  * This component fetches and displays paintings based on different query types.
  *
- * @param {string} queryType - The type of query (e.g., "artist", "gallery", "search", "years").
- * @param {string|array} queryValue - The value associated with the query type.
- * @param {string} [size="w_200"] - The width size of the painting image from Cloudinary. Default 200
- * @param {number} [columns=1] - The number of columns in the grid layout. Default 1
- * @param {string} [defaultSort="sortByTitle"] - The default sort option for the paintings. Default is alphabetical title sort
+ * @param {string} queryType                    - The type of query (e.g., "artist", "gallery", "search", "years").
+ * @param {string|array} queryValue             - The value associated with the query type.
+ * @param {string} [size="w_200"]               - The width size of the painting image from Cloudinary. Default 200
+ * @param {number} [columns=1]                  - The number of columns in the grid layout. Default 1
+ * @param {string} [defaultSort="sortByTitle"]  - The default sort option for the paintings. Default is alphabetical title sort
  * @returns {JSX.Element} PaintingsList component
  */
 const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, defaultSort = "sortByTitle"}) => {
@@ -129,22 +129,22 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
     {/* Paintings Grid - Even Height & Scrollable */}
     <div className={`pb-20 custom-scrollbar grid ${gridTemplateColumns} gap-2 gap-y-4 overflow-y-auto h-full grid-auto-rows-fr`}>
       {sortedPaintings.map((painting) => (
-        <div className="mr-2 mb-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full">
-          <div key={painting.paintingId}
-               onClick={() => setSelectedPainting(painting)}>
+        <div onClick={() => setSelectedPainting(painting)}
+          key={painting.paintingId}
+          className="cursor-pointer mr-2 mb-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full">
             <div className="h-90 flex justify-center items-center">
               <PaintingImage painting={painting} size={size} />
             </div>
             <h3 className="text-lg font-bold mt-2">{painting.title}</h3>
             <p className="text-sm text-bg-[#21130d]">{painting.medium}</p>
             <p className="text-sm"><strong>Year:</strong> {painting.yearOfWork}</p>
-            <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>
-          </div>
+            <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>          
         <div className="mt-auto">
           {painting.wikiLink ? (
           <a
+            onClick={(event) => event.stopPropagation()} // Prevent modal opening
             href={painting.wikiLink}
-            className="w-1/2 mx-auto mt-auto m-0 font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+            className="z-10 w-1/2 mx-auto mt-auto m-0 font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
           >
             Learn more
           </a> ) : (
