@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const location = useLocation();
   
+  const hasFavorites = () => {
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    return storedFavorites.length > 0;
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 backdrop-blur">
       <div className="container mx-auto flex justify-between items-center">
@@ -11,10 +16,22 @@ const Navbar = () => {
           <img src="/assets/logo.png" alt="logo" className="h-12 w-12 m-2 mt-0 mb-0" />
           Elysiana
         </Link>
-        <ul className="flex space-x-8"> {/* navbar items animation credit: https://getdevdone.com/blog/our-favorite-navigation-menu-effects.html */}
+        <ul className="flex space-x-8">
+        {hasFavorites && (
+            <li className="font-quicksand relative group">
+              <Link
+                to="/favorites"
+                className="text-white text-lg relative overflow-hidden block py-2 px-4 transition-all duration-300 ease-in-out transform hover:scale-110"
+              >
+                <span className="relative z-10">Favorites</span>
+                <span
+                  className="absolute left-0 w-full h-7 bg-[#21130d] transition-transform duration-300 ease-in-out scale-x-0 group-hover:scale-x-100"
+                ></span>
+              </Link>
+            </li>
+          )}
           {['Artists', 'Paintings', 'Genres', 'Galleries', 'Login'].map((item) => {
             const isActive = location.pathname === `/${item.toLowerCase()}`;
-
             return (
               <li key={item} className="font-quicksand relative group">
                 <Link

@@ -45,8 +45,6 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
     setSortedPaintings(sortPaintings(paintings));
   }, [paintings, sortOption]); // Runs whenever paintings or sortOption changes
   
-
-
   useEffect(() => {
     console.log("Received queryType and queryValue:", queryType, queryValue);
     const loadPaintings = async () => {
@@ -112,7 +110,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
         />
       )}
       {/* Sorting Header - Stays at the Top */}
-      <div className="w-80 ml-auto m-2 backdrop-blur bg-white rounded-xl bg-opacity-30 sticky top-2 p-1 z-20 flex justify-end items-center">
+      <div className="w-80 ml-auto m-2 backdrop-blur bg-white rounded-xl bg-opacity-30 sticky top-2 p-0 z-20 flex justify-end items-center">
             <h1 className="text-white font-quicksand mr-2">Sort Paintings By:</h1>
             <select
               className="w-1/2 font-quicksand text-white bg-[#ae752f] m-1 p-1 rounded-xl"
@@ -127,7 +125,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
       </div>
   
     {/* Paintings Grid - Even Height & Scrollable */}
-    <div className={`pb-20 custom-scrollbar grid ${gridTemplateColumns} gap-2 gap-y-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+    <div className={`pb-8 pr-0 pl-2 custom-scrollbar grid ${gridTemplateColumns} gap-2 gap-y-4 overflow-y-auto h-full grid-auto-rows-fr`}>
       {sortedPaintings.map((painting) => (
         <div onClick={() => setSelectedPainting(painting)}
           key={painting.paintingId}

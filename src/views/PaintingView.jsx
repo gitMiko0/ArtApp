@@ -5,7 +5,7 @@ import PaintingsFilter from '../components/PaintingsFilter';
 const PaintingView = () => {
   const background = "/assets/loginBackground.jpg";
 
-  const [sortOption, setSortOption] = useState("sortByTitle"); //initial state
+  const [sortOption, setSortOption] = useState("sortByTitle"); // title as default sort
   const [appliedFilter, setAppliedFilter] = useState({});
 
   return (

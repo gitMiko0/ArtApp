@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import PaintingImage from "./PaintingImage";
 import { fetchData } from "../services/apiServices";
-import { data } from "react-router-dom";
+import FavoriteButton from "./FavoriteButton";
 
 Modal.setAppElement("#root");
 
@@ -64,7 +64,7 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
         {/* Right Column: Painting Details */}
         <div className="w-full md:w-2/3 p-4 pl-2 flex flex-col justify-between">
           <div className="custom-scrollbar pr-2 overflow-y-auto">
-            <h2 className="font-quicksand text-xl font-semibold mb-2">
+            <h2 className="font-quicksand text-3xl font-semibold mb-2">
               {painting.title}
             </h2>
             {artist && (
@@ -78,7 +78,7 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
 
             {/* Painting Info */}
             <ul className="font-quicksand text-sm text-gray-800 space-y-2">
-              <li><strong>Year:</strong> {painting.year || "Unknown"}</li>
+              <li><strong>Year:</strong> {painting.yearOfWork || "Unknown"}</li>
               <li><strong>Medium:</strong> {painting.medium || "Not specified"}</li>
               <li><strong>Dimensions:</strong> {painting.width} × {painting.height} cm</li>
               <li><strong>MSRP:</strong> ${painting.MSRP}</li>
@@ -123,7 +123,7 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
             )}
 
             {/* Links */}
-            <ul className="font-quicksand text-sm text-blue-600 space-y-2">
+            <ul className="flex font-quicksand text-sm mt-2 text-blue-600 space-x-4">
               {painting.wikiLink && (
                 <li>
                   <a href={painting.wikiLink} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -167,13 +167,9 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
               <span className="relative z-10 text-white">Close</span>
             </button>
 
-            <button
-              className="relative px-4 py-2 bg-[#ae752f] text-white rounded-lg overflow-hidden group transition-colors duration-300 ease-in-out"
-              onClick={() => onAddToFavorites(painting)}
-            >
-              <span className="absolute inset-0 bg-[#21130d] scale-x-0 origin-center transition-transform duration-300 ease-in-out group-hover:scale-x-100 z-0"></span>
-              <span className="relative z-10">Add to Favorites</span>
-            </button>
+            <div>
+              <FavoriteButton item={painting} type="painting" />
+            </div>
           </div>
         </div>
       </div>
