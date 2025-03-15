@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchData } from "../services/apiServices";
 import PaintingModal from "./PaintingModal";
 import PaintingImage from "./PaintingImage";
+import Message from "./Message";
 
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
 
@@ -97,7 +98,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   
   if (loading) return <LoadingSkeleton columns={columns} />
   if (error) return <p>Error: {error}</p>
-  if (!paintings.length) return <p>No paintings found.</p>
+  if (!paintings.length) return <Message text="No paintings found" />
 
   const gridTemplateColumns = `grid-cols-${columns}` // Constructing the Tailwind class
 
