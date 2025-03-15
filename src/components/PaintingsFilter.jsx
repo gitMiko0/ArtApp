@@ -56,7 +56,7 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
       {/* 2x2 Grid for Radio Buttons  */}
       <div className="mt-6 grid grid-cols-2 gap-4 w-full">
         {[
-          { type: "search", label: "Search" },
+          { type: "search", label: "Title" },
           { type: "artist", label: "Artist" },
           { type: "gallery", label: "Gallery" },
           { type: "years", label: "Years" },
