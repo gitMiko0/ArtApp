@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
 const PLACEHOLDER_IMAGE = "/assets/placeholder.jpg"; // Adjust as needed
@@ -22,17 +22,20 @@ const PaintingImage = ({ painting, size = "w_300" }) => {
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {isLoading && (
-        <div className="p-20 absolute inset-0 bg-gray-200 animate-pulse rounded"></div>
+      {/* Loading Skeleton */}
+      {isLoading && !imageError && (
+        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded w-full h-full"></div>
       )}
+
+      {/* Image Element */}
       <img
         src={imageError ? PLACEHOLDER_IMAGE : imageUrl}
         alt={painting ? painting.title : "Placeholder image"}
-        className={`max-h-full max-w-full object-contain rounded ${
-          isLoading ? "hidden" : "block"
+        className={`max-h-full max-w-full object-contain rounded transition-opacity duration-300 ${
+          isLoading ? "opacity-0" : "opacity-100"
         }`}
         onError={handleError}
-        onLoad={handleLoad} // When image loads, remove skeleton
+        onLoad={handleLoad}
       />
     </div>
   );

@@ -3,7 +3,6 @@ import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
 import LoadingFetch from "../hooks/LoadingFetch";
 import PaintingsList from "../components/PaintingsList";
-import { useFavorites } from "../hooks/FavoritesProvider";
 import FavoriteButton from "../components/FavoriteButton";
 import Message from "../components/Message";
 
