@@ -31,7 +31,7 @@ const FavoritesModal = ({ favorites, isOpen, onClose, onClearFavorites }) => {
             ✕
             </button>
 
-          <h2 className="text-3xl font-quicksand font-semibold text-center mb-4">
+          <h2 className="text-4xl font-alexbrush font-semibold text-center mb-1">
             My Favorites
           </h2>
   
