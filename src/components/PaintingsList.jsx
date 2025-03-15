@@ -136,6 +136,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
             <h3 className="text-lg font-bold mt-2">{painting.title}</h3>
             <p className="text-sm text-bg-[#21130d]">{painting.medium}</p>
             <p className="text-sm"><strong>Year:</strong> {painting.yearOfWork}</p>
+            <p className="text-sm"><strong>Dimensions:</strong> {painting.width} × {painting.height} cm</p>
             <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>          
         <div className="mt-auto">
           {painting.wikiLink ? (
