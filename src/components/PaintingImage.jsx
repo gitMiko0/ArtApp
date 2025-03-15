@@ -24,7 +24,7 @@ const PaintingImage = ({ painting, size = "w_300" }) => {
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Loading Skeleton */}
       {isLoading && !imageError && (
-        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded w-full h-full"></div>
+        <div className="absolute inset-0 bg-gray-400 animate-pulse rounded w-full h-full"></div>
       )}
 
       {/* Image Element */}
