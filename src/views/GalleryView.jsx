@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
+import Message from "../components/Message";
 import SortedList from "../components/SortedList";
 import LoadingFetch from "../hooks/LoadingFetch";
 import PaintingsList from "../components/PaintingsList";
 import FavoriteButton from "../components/FavoriteButton";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"; // React Leaflet components
 import 'leaflet/dist/leaflet.css'; // Leaflet styles
+import LocationMap from "../components/LocationMap";
 
 const GalleryView = () => {
   const background = "/assets/loginBackground.jpg";
@@ -55,7 +57,7 @@ const GalleryView = () => {
         <div className="font-quicksand custom-scrollbar w-4/12 p-4 overflow-y-auto">
           <h2 className="text-white text-shadow-lg font-alexbrush text-4xl">Gallery Details</h2>
           {selectedGallery ? (
-            <div className="p-4 bg-white bg-opacity-30 rounded-xl backdrop-blur">
+            <div className="mt-4 p-4 bg-white bg-opacity-30 rounded-xl backdrop-blur">
               <p><strong>Name:</strong> {selectedGallery.galleryName}</p>
               <p><strong>Native Name:</strong> {selectedGallery.galleryNativeName}</p>
               <p><strong>City:</strong> {selectedGallery.galleryCity}</p>
@@ -72,20 +74,11 @@ const GalleryView = () => {
               
               {/* Lat/Long Map Integration with https://react-leaflet.js.org/ (rounded only works with overflow-hidden) */}
                 {selectedGallery.latitude && selectedGallery.longitude ? (
-                <div className="mt-4 mb-4 border border-4 border-white rounded-xl">
-                  <div className="h-64 w-full rounded-lg overflow-hidden"> 
-                    <MapContainer center={[selectedGallery.latitude, selectedGallery.longitude]} zoom={10}>
-                      <TileLayer
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      />
-                      <Marker position={[selectedGallery.latitude, selectedGallery.longitude]}>
-                        <Popup>{selectedGallery.galleryName}</Popup>
-                      </Marker>
-                      <MapUpdater position={[selectedGallery.latitude, selectedGallery.longitude]} />
-                    </MapContainer>
-                  </div>
-                </div>
+                  <LocationMap 
+                  latitude={selectedGallery.latitude}
+                  longitude={selectedGallery.longitude}
+                  name={selectedGallery.galleryName}
+                />
                 ) : (
                   <p className="text-black mt-4">Location Unavailable</p>
                 )}
@@ -102,7 +95,7 @@ const GalleryView = () => {
               </div>
             </div>
           ) : (
-            <p className="font-quicksand">Select a gallery to view details.</p>
+            <Message text="Select a gallery to view details." />
           )}
         </div>
 
@@ -117,7 +110,7 @@ const GalleryView = () => {
                 size="w_600" 
               />
             ) : (
-              <p className="font-quicksand">Select a gallery to view paintings.</p>
+              <Message text="Select a gallery to view paintings." />
             )}
           </div>
         </div>

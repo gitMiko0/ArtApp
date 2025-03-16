@@ -22,9 +22,9 @@ const FavoriteButton = ({ item, type }) => {
   return (
     <button
       onClick={handleFavorite}
-      className={`relative px-4 py-2 ${isFav ? 'bg-red-600' : 'bg-[#ae752f]'} text-white rounded-lg overflow-hidden group transition-colors duration-300 ease-in-out`}
+      className={`relative px-4 py-2 ${isFav ? 'bg-red-900' : 'bg-[#ae752f]'} text-white rounded-lg overflow-hidden group transition-colors duration-300 ease-in-out`}
     >
-      <span className={`absolute inset-0 ${isFav ? 'bg-red-800' : 'bg-[#21130d]'} scale-x-0 origin-center transition-transform duration-300 ease-in-out group-hover:scale-x-100 z-0`}></span>
+      <span className={`absolute inset-0 ${isFav ? 'bg-red-700' : 'bg-[#21130d]'} scale-x-0 origin-center transition-transform duration-300 ease-in-out group-hover:scale-x-100 z-0`}></span>
       <span className="relative z-10">{isFav ? 'Remove from Favorites' : 'Add to Favorites'}</span>
     </button>
   );

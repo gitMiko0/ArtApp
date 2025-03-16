@@ -3,14 +3,13 @@ import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
 import LoadingFetch from "../hooks/LoadingFetch";
 import PaintingsList from "../components/PaintingsList";
-import { useFavorites } from "../hooks/FavoritesProvider";
 import FavoriteButton from "../components/FavoriteButton";
+import Message from "../components/Message";
 
 const ArtistView = () => {
   const background = "/assets/loginBackground.jpg"; // Background image path
   const { data: artists, loading, error } = LoadingFetch("artists");
   const [selectedArtistId, setSelectedArtistId] = useState(null); // State for selected artist ID
-  const { favorites, addFavorite, removeFavorite, isFavorite } = useFavorites();
 
   return (
     <div
@@ -19,7 +18,7 @@ const ArtistView = () => {
     >
       <div className="flex h-full w-full">
         {/* Left column - Artist list */}
-        <div className="font-quicksand custom-scrollbar w-3/12 p-4 overflow-y-auto">
+        <div className="font-quicksand custom-scrollbar h-full w-3/12 p-4 overflow-y-auto">
           {loading ? (
             <Loading />
           ) : error ? (
@@ -68,13 +67,13 @@ const ArtistView = () => {
                 </div>
               ))
           ) : (
-            <p>Select an artist to view details.</p>
+            <Message text="Select an artist to view their details"/>
           )}
         </div>
 
         {/* Right column - Paintings for the selected artist */}
         <div className="custom-scrollbar w-5/12 h-9/12 overflow-y-auto">
-          <h2 className="text-shadow-lg text-white font-alexbrush text-4xl mt-4 mb-0">
+          <h2 className="text-shadow-lg text-white font-alexbrush text-4xl mt-4 mb-2">
             Paintings
           </h2>
           <div>
@@ -85,11 +84,10 @@ const ArtistView = () => {
                 size="w_600" 
               />
             ) : (
-              <p className="font-quicksand p-4">Select an artist to view their paintings</p>
+              <Message text="Select an artist to view their paintings"/>
             )}          
           </div>
         </div>
-
       </div>
     </div>
   );

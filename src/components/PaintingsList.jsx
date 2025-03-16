@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchData } from "../services/apiServices";
 import PaintingModal from "./PaintingModal";
 import PaintingImage from "./PaintingImage";
+import Message from "./Message";
 
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
 
@@ -41,7 +42,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
         }
       });
     };
-  
+
     setSortedPaintings(sortPaintings(paintings));
   }, [paintings, sortOption]); // Runs whenever paintings or sortOption changes
   
@@ -97,7 +98,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   
   if (loading) return <LoadingSkeleton columns={columns} />
   if (error) return <p>Error: {error}</p>
-  if (!paintings.length) return <p>No paintings found.</p>
+  if (!paintings.length) return <Message text="No paintings found" />
 
   const gridTemplateColumns = `grid-cols-${columns}` // Constructing the Tailwind class
 
@@ -136,6 +137,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
             <h3 className="text-lg font-bold mt-2">{painting.title}</h3>
             <p className="text-sm text-bg-[#21130d]">{painting.medium}</p>
             <p className="text-sm"><strong>Year:</strong> {painting.yearOfWork}</p>
+            <p className="text-sm"><strong>Dimensions:</strong> {painting.width} × {painting.height} cm</p>
             <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>          
         <div className="mt-auto">
           {painting.wikiLink ? (
@@ -167,19 +169,24 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
 const LoadingSkeleton = ({ columns }) => {
   // This component is included here because it is made specifically for paintings
   return (
-    <div className={`pb-20 p-2 mt-14 custom-scrollbar grid grid-cols-${columns} gap-4 overflow-y-auto h-full grid-auto-rows-fr`}>
-      {Array.from({ length: columns * 3 }).map((_, index) => (
-        <div key={index} className="mr-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full">
-          <div className="animate-pulse">
-          <div className="h-80 bg-opacity-50 backdrop-blur bg-gray-100 rounded"></div>
-          <div className="h-6 bg-opacity-50 backdrop-blur bg-gray-100rounded mt-2"></div>
-          <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2 w-3/4"></div>
-          <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2 w-1/2"></div>
-          <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2 w-full"></div>
-          <div className="w-1/2 h-8 bg-gray-300 rounded-xl mt-2 mx-auto"></div>
+    <div className="m-2 mr-2 mt-0 h-full">
+      <div className="w-80 ml-auto m-2 backdrop-blur bg-white rounded-xl bg-opacity-30 sticky top-2 p-0 z-20 flex justify-end items-center">
+        <div className="h-7 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2 z-30"></div>
+      </div>
+      <div className={`pb-8 mr-2 custom-scrollbar grid grid-cols-${columns} gap-2 gap-y-4 overflow-y-auto h-full grid-auto-rows-fr`}>
+        {Array.from({ length: columns * 3 }).map((_, index) => (
+          <div key={index} className="ml-2 mb-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full">
+            <div className="animate-pulse">
+            <div className="h-80 bg-opacity-50 backdrop-blur bg-gray-100 rounded"></div>
+            <div className="h-6 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2"></div>
+            <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2 w-3/4"></div>
+            <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2 w-1/2"></div>
+            <div className="h-4 bg-opacity-50 backdrop-blur bg-gray-100 rounded mt-2 w-full"></div>
+            <div className="w-1/2 h-8 bg-gray-300 rounded-xl mt-2 mx-auto"></div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

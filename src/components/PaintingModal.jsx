@@ -168,7 +168,11 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
             </button>
 
             <div>
-              <FavoriteButton item={painting} type="painting" />
+              <FavoriteButton item={{
+                        id: painting.paintingId,
+                        name: painting.title                        
+                      }} 
+                type="painting" onAddToFavorites={onAddToFavorites} />
             </div>
           </div>
         </div>

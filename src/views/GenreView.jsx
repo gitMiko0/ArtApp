@@ -3,6 +3,7 @@ import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
 import PaintingsList from "../components/PaintingsList.jsx";
 import { fetchData } from "../services/apiServices.js";
+import Message from "../components/Message.jsx";
 
 const GenreView = () => {
   //const background = "/assets/jr-korpa-KMEiyRyHW74-unsplash.jpg";
@@ -63,8 +64,8 @@ const GenreView = () => {
         </div>
 
         {/* Right column - Genre details */}
-        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 overflow-y-auto">
-          <div className="h-3/12 max-h-3/12">
+        <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
+          <div className="h-5/12 min-h-5/12">
             {/* Genre details shown here */}
             {selectedGenre ? (
               <div className="flex justify-between items-center">
@@ -82,7 +83,9 @@ const GenreView = () => {
                 </div>
               </div>
             ) : (
-              <p className="h-40 font-quicksand p-4">Select a genre to see details.</p>
+              <div className="mt-8">
+                <Message text="Select a genre to see details." />
+              </div>
             )}
           </div>
 
@@ -96,8 +99,10 @@ const GenreView = () => {
                columns={3}
              />
             ) : (
-              <p className="font-quicksand p-4">Select a genre to see paintings.</p>
-            )};
+              <div className="mt-48">
+                <Message text="Select a genre to see paintings." />
+              </div>
+            )}
           </div>
         </div>
       </div>
