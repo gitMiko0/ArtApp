@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../services/apiServices";
+import Message from "./Message";
 
 const PaintingsFilter = ({ setAppliedFilter }) => {
   const [filterType, setFilterType] = useState("");
@@ -8,6 +9,7 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
   const [artists, setArtists] = useState([]);
   const [galleries, setGalleries] = useState([]);
 
+  
   useEffect(() => {
     const fetchFilters = async () => {
       const [artistsData, galleriesData] = await Promise.all([
@@ -24,15 +26,23 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
   }, [setAppliedFilter]);
 
   const handleSearch = (e) => {
-    if (e.key === "Enter") {
-      setFilterType("search");
-      setFilterValue(e.target.value);
+    if (e.key !== "Enter") return;
+  
+    if (filterType === "search") {
+      setAppliedFilter({ type: "search", value: searchTerm });
+    } else if (filterType === "years" && filterValue[0] && filterValue[1]) {
+      if (!filterValue[0] || !filterValue[1]) {
+        return (
+          <Message text="Please fill in both fields."/>
+        );
+      }
+      setAppliedFilter({ type: "years", value: filterValue });
     }
   };
-
+  
   const applyFilter = () => {
     let value = filterValue;
-    if (filterType === "title") value = searchTerm;
+    if (filterType === "search") value = searchTerm;
     if (!value || (Array.isArray(value) && (!value[0] || !value[1]))) {
       console.log("Please select a valid filter value.");
       return;
@@ -153,6 +163,7 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
                 inputMode="numeric"
                 type="number"
                 placeholder="Start Year"
+                onKeyDown={handleSearch}
                 onChange={(e) =>
                   setFilterValue([e.target.value, filterValue[1] || ""])
                 }
@@ -163,6 +174,7 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
                 type="number"
                 inputMode="numeric"
                 placeholder="End Year"
+                onKeyDown={handleSearch}
                 onChange={(e) =>
                   setFilterValue([filterValue[0] || "", e.target.value])
                 }
