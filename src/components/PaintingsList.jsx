@@ -30,7 +30,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
       return [...paintings].sort((a, b) => {
         switch (sortOption) {
           case "sortByArtist": 
-            return (a.artistName || "").localeCompare(b.artistName || "");
+            return (a.artistLastName || "").localeCompare(b.artistLastName || "");
           case "sortByTitle": 
             return (a.title || "").localeCompare(b.title || "");
           case "sortByGallery": 
@@ -81,9 +81,19 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
             setLoading(false);
             return;
         }
-
-        const data = await fetchData(route);
-        setPaintings(data);
+        // fetch all necessary data for sorting, mainly artist and gallery names
+        const paintingsData = await fetchData(route);
+        const artistsData = await fetchData("artists");
+        const galleriesData = await fetchData("galleries");
+  
+        // merge together to attach painting to sortable value and to display them in that order
+        const mergedPaintings = paintingsData.map((painting) => ({
+          ...painting,
+          artistLastName: artistsData.find((a) => a.artistId === painting.artistId)?.lastName || "",
+          galleryName: galleriesData.find((g) => g.galleryId === painting.galleryId)?.galleryName || "",
+        }));
+  
+        setPaintings(mergedPaintings);
       } catch (err) {
         console.error("Error fetching paintings:", err);
         setError(err.message || "Failed to fetch paintings.");
@@ -92,9 +102,10 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
         setLoading(false);
       }
     };
-
+  
     loadPaintings();
   }, [queryType, queryValue]);
+  
   
   if (loading) return <LoadingSkeleton columns={columns} />
   if (error) return <p>Error: {error}</p>
