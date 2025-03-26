@@ -10,16 +10,20 @@ const PaintingImage = ({ painting, size = "w_300" }) => {
 
   const imageFileName = painting && painting.imageFileName;
   const imageKey = imageFileName ? `${imageFileName}-${size}` : null;
+
   useEffect(() => {
     if (imageFileName && size) {
+      console.log("Generated imageKey:", imageKey);
+
       const cachedImage = localStorage.getItem(imageKey);
-      
-      if (cachedImage) {
-        setImageUrl(cachedImage); // Set cached image if available
-        console.log("Using cached image:", cachedImage, imageKey);
+      console.log("Cached image:", cachedImage); // Log the cached image
+
+      if (cachedImage && cachedImage !== PLACEHOLDER_IMAGE) {
+        setImageUrl(cachedImage); // Set cached image if available and not placeholder
+        console.log("Using cached image:", cachedImage);
         setIsLoading(false); // Stop loading
       } else {
-        // Construct new image URL if not cached
+        // Construct new image URL if not cached or if placeholder
         const newImageUrl = `${CLOUDINARY_BASE_URL}/${size}/art/paintings/${imageFileName}`;
         setImageUrl(newImageUrl); // Set URL while loading
       }
@@ -32,9 +36,10 @@ const PaintingImage = ({ painting, size = "w_300" }) => {
   };
 
   const handleLoad = () => {
-    if (imageKey && !imageError) {
+    if (imageKey && !imageError && imageUrl !== PLACEHOLDER_IMAGE) {
       // Cache the image URL after it loads successfully
-      localStorage.setItem(imageKey, imageUrl);
+      console.log("Caching image:", imageUrl);
+      localStorage.setItem(imageKey, imageUrl); // Only store if it's not the placeholder
     }
     setIsLoading(false); // Hide loading skeleton after image loads
   };
