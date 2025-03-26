@@ -3,7 +3,7 @@ import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
 import PaintingsList from "../components/PaintingsList.jsx";
 import Message from "../components/Message.jsx";
-import LoadingFetch from "../hooks/LoadingFetch"; // Import the custom hook
+import LoadingFetch from "../hooks/LoadingFetch";
 
 const GenreView = () => {
   const background = "/assets/loginBackground.jpg";
