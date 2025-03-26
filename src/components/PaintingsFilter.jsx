@@ -159,7 +159,7 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
           {filterType === "years" && (
             <div className="flex w-full space-x-2">
               <input
-                className="w-1/2 text-white text-center backdrop-blur bg-white bg-opacity-40 font-quicksand rounded-2xl p-2 placeholder-white transition-all duration-300"
+                className="w-1/2 text-sm text-white text-center backdrop-blur bg-white bg-opacity-40 font-quicksand rounded-2xl p-2 placeholder-white transition-all duration-300"
                 inputMode="numeric"
                 type="number"
                 placeholder="Start Year"
@@ -167,10 +167,10 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
                 onChange={(e) =>
                   setFilterValue([e.target.value, filterValue[1] || ""])
                 }
-                value={filterValue[0] || ""}
+                value={filterValue[0]}
               />
               <input
-                className="w-1/2 text-white text-center backdrop-blur bg-white bg-opacity-40 font-quicksand rounded-2xl p-2 placeholder-white transition-all duration-300"
+                className="w-1/2 text-sm text-white text-center backdrop-blur bg-white bg-opacity-40 font-quicksand rounded-2xl p-2 placeholder-white transition-all duration-300"
                 type="number"
                 inputMode="numeric"
                 placeholder="End Year"
@@ -178,7 +178,7 @@ const PaintingsFilter = ({ setAppliedFilter }) => {
                 onChange={(e) =>
                   setFilterValue([filterValue[0] || "", e.target.value])
                 }
-                value={filterValue[1] || ""}
+                value={filterValue[1]}
               />
             </div>
           )}

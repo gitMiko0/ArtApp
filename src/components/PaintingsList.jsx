@@ -48,9 +48,21 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   
   useEffect(() => {
     console.log("Received queryType and queryValue:", queryType, queryValue);
+  
     const loadPaintings = async () => {
       setLoading(true);
       setError(null);
+  
+      const cacheKey = `paintings_${queryType}_${JSON.stringify(queryValue)}`; //Caches unique requests (ie. repeated searches are not re-fetched from API)
+      const cachedData = localStorage.getItem(cacheKey);
+  
+      if (cachedData) {
+        console.log("Loading paintings from cache...");
+        setPaintings(JSON.parse(cachedData));
+        setLoading(false);
+        return;
+      }
+  
       try {
         let route = "paintings";
         switch (queryType) {
@@ -76,23 +88,24 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
             break;
           default:
             console.warn("Invalid queryType:", queryType);
-            setError("Invalid query type.");
             setPaintings([]);
             setLoading(false);
             return;
         }
-        // fetch all necessary data for sorting, mainly artist and gallery names
+  
         const paintingsData = await fetchData(route);
         const artistsData = await fetchData("artists");
         const galleriesData = await fetchData("galleries");
   
-        // merge together to attach painting to sortable value and to display them in that order
         const mergedPaintings = paintingsData.map((painting) => ({
           ...painting,
           artistLastName: artistsData.find((a) => a.artistId === painting.artistId)?.lastName || "",
           galleryName: galleriesData.find((g) => g.galleryId === painting.galleryId)?.galleryName || "",
         }));
   
+        // Save to localStorage for caching
+        localStorage.setItem(cacheKey, JSON.stringify(mergedPaintings));
+        
         setPaintings(mergedPaintings);
       } catch (err) {
         console.error("Error fetching paintings:", err);
@@ -105,6 +118,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
   
     loadPaintings();
   }, [queryType, queryValue]);
+  
   
   
   if (loading) return <LoadingSkeleton columns={columns} />

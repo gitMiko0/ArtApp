@@ -2,41 +2,22 @@ import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
 import PaintingsList from "../components/PaintingsList.jsx";
-import { fetchData } from "../services/apiServices.js";
 import Message from "../components/Message.jsx";
+import LoadingFetch from "../hooks/LoadingFetch"; // Import the custom hook
 
 const GenreView = () => {
-  //const background = "/assets/jr-korpa-KMEiyRyHW74-unsplash.jpg";
   const background = "/assets/loginBackground.jpg";
-  const [genres, setGenres] = useState([]); // State to store genres
-  const [selectedGenreId, setSelectedGenreId] = useState(null); // State for selected genre ID
-  const [selectedGenre, setSelectedGenre] = useState(null); // State for selected genre details
-  const [loading, setLoading] = useState(true); // Loading state
+  const { data: genres, loading, error } = LoadingFetch("genres"); // Use the hook for fetch & caching
+  const [selectedGenreId, setSelectedGenreId] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
-  useEffect(() => {
-    const loadGenres = async () => {
-      try {
-        const data = await fetchData("genres");
-        console.log("Fetched Genres:", data); // Debugging output
-        setGenres(data);
-      } catch (error) {
-        console.error("Error fetching genres:", error);
-        setGenres([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadGenres();
-  }, []);
-
-  // Fetch selected genre details when selectedGenreId changes
+  // Update selected genre when the ID changes
   useEffect(() => {
     if (selectedGenreId) {
       const selected = genres.find((genre) => genre.genreId === selectedGenreId);
       setSelectedGenre(selected);
     } else {
-      setSelectedGenre(null); // Clear details when no genre is selected
+      setSelectedGenre(null);
     }
   }, [selectedGenreId, genres]);
 
@@ -50,6 +31,8 @@ const GenreView = () => {
         <div className="font-quicksand custom-scrollbar w-3/12 p-4 overflow-y-auto">
           {loading ? (
             <Loading />
+          ) : error ? (
+            <Message text={`Error: ${error}`} />
           ) : (
             <SortedList
               header="Genres"
@@ -66,11 +49,10 @@ const GenreView = () => {
         {/* Right column - Genre details */}
         <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
           <div className="h-5/12 min-h-5/12">
-            {/* Genre details shown here */}
             {selectedGenre ? (
               <div className="flex justify-between items-center">
                 <h2 className="text-shadow text-white font-bold m-2 font-alexbrush text-2xl">
-                  {selectedGenre.genreName} 
+                  {selectedGenre.genreName}
                   <a
                     href={selectedGenre.wikiLink}
                     className="items-right font-quicksand text-xs inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
@@ -92,12 +74,12 @@ const GenreView = () => {
           {/* Paintings for the selected genre */}
           <div>
             {selectedGenreId ? (
-               <PaintingsList
-               queryType="genres"
-               queryValue={selectedGenreId}
-               size="w_400" 
-               columns={3}
-             />
+              <PaintingsList
+                queryType="genres"
+                queryValue={selectedGenreId}
+                size="w_400"
+                columns={3}
+              />
             ) : (
               <div className="mt-48">
                 <Message text="Select a genre to see paintings." />

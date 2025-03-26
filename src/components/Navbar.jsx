@@ -32,7 +32,7 @@ const Navbar = () => {
           {['Artists', 'Paintings', 'Genres', 'Galleries', 'Login'].map((item) => {
             const isActive = location.pathname === `/${item.toLowerCase()}`;
             return (
-              <li key={item} className="font-quicksand relative group">
+              <li key={item} className="font-quicksand relative group mr-2">
                 <Link
                   to={`/${item.toLowerCase()}`}
                   className="text-white text-lg relative overflow-hidden block py-2 px-2 transition-all duration-300 ease-in-out transform hover:scale-110"
