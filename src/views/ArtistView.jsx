@@ -81,7 +81,7 @@ const ArtistView = () => {
               <PaintingsList 
                 queryType="artist" 
                 queryValue={selectedArtistId} 
-                size="w_600" 
+                size="w_800" 
               />
             ) : (
               <Message text="Select an artist to view their paintings"/>

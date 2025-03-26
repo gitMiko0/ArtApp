@@ -77,7 +77,7 @@ const GenreView = () => {
               <PaintingsList
                 queryType="genres"
                 queryValue={selectedGenreId}
-                size="w_400"
+                size="w_800"
                 columns={3}
               />
             ) : (
