@@ -18,7 +18,7 @@ const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
  * @param {string} [defaultSort="sortByTitle"]  - The default sort option for the paintings. Default is alphabetical title sort
  * @returns {JSX.Element} PaintingsList component
  */
-const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, defaultSort = "sortByTitle"}) => {
+const PaintingsList = ({ queryType, queryValue, size = "w_800", columns = 1, defaultSort = "sortByTitle"}) => {
   const [paintings, setPaintings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -97,7 +97,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
         const artistsData = await fetchData("artists");
         const galleriesData = await fetchData("galleries");
   
-        const mergedPaintings = paintingsData.map((painting) => ({
+        const mergedPaintings = paintingsData.map((painting) => ({ // done to simplify sorting process
           ...painting,
           artistLastName: artistsData.find((a) => a.artistId === painting.artistId)?.lastName || "",
           galleryName: galleriesData.find((g) => g.galleryId === painting.galleryId)?.galleryName || "",
@@ -167,7 +167,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_200", columns = 1, def
         <div className="mt-auto">
           {painting.wikiLink ? (
           <a
-            onClick={(event) => event.stopPropagation()} // Prevent modal opening
+            onClick={(event) => event.stopPropagation()} // Prevent modal opening when clicking the button
             href={painting.wikiLink}
             className="z-10 w-1/2 mx-auto mt-auto m-0 font-quicksand text-sm inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 rounded-xl hover:bg-[#21130d] hover:text-white transition-colors duration-300"
           >

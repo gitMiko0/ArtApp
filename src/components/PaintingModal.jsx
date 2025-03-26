@@ -22,6 +22,7 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
   const [artist, setArtist] = useState(null);
 
   useEffect(() => {
+    
     const fetchArtData = async () => {
       try {
         if (painting.galleryId) {
