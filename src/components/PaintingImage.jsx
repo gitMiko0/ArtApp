@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
-const PLACEHOLDER_IMAGE = "/assets/placeholder.jpg"; // Adjust as needed
+const PLACEHOLDER_IMAGE = "/assets/placeholder.jpg";
 
 const PaintingImage = ({ painting, size = "w_300" }) => {
   const [imageError, setImageError] = useState(false);
