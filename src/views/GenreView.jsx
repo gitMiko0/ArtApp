@@ -47,37 +47,38 @@ const GenreView = () => {
           )}
         </div>
 
-        {/* Right column - Genre details */}
+      {/* Genre details */}
         <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
           <div className="h-9/12 min-h-9/12 max-h-9/12">
             {selectedGenre ? (
-        <div className="flex justify-between items-start p-4 custom-scrollbar max-h-9/12 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
-        {/* Left side: Image + Genre Name */}
-        <div className="flex flex-col items-center w-4/12">
-          <div className="w-11/12 h-11/12 overflow-hidden rounded-lg flex-shrink-0">
-            <ImageComponent 
-              id={selectedGenre.genreId} 
-              type="genre" 
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <h2 className="text-shadow text-white font-bold mt-2 font-alexbrush text-2xl">
-            {selectedGenre.genreName}
-          </h2>
-          <a
-            href={selectedGenre.wikiLink}
-            className="inline-block font-quicksand text-xs text-white bg-[#ae752f] p-1 px-3 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
-          >
-            Learn more
-          </a>
-        </div>
-      
-        {/* Right side: Description + Button */}
-        <div className="flex flex-col w-8/12 ml-4">
-          <strong>Description:</strong> {selectedGenre.description}
-        </div>
-      </div>
-                  ) : (
+              <div className="flex justify-between items-start p-4 custom-scrollbar max-h-9/12 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
+                
+                {/* Left side: Image + Genre Name */}
+                <div className="flex flex-col items-center w-4/12">
+                  <div className="w-11/12 h-11/12 overflow-hidden rounded-lg flex-shrink-0">
+                    <ImageComponent 
+                      id={selectedGenre.genreId} 
+                      type="genre" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h2 className="text-shadow text-white font-bold mt-2 font-alexbrush text-2xl">
+                    {selectedGenre.genreName}
+                  </h2>
+                  <a
+                    href={selectedGenre.wikiLink}
+                    className="inline-block font-quicksand text-xs text-white bg-[#ae752f] p-1 px-3 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+                  >
+                    Learn more
+                  </a>
+                </div>
+
+                {/* Right side: Description */}
+                <div className="flex flex-col w-8/12 ml-4">
+                  <strong>Description:</strong> {selectedGenre.description}
+                </div>
+              </div>
+            ) : (
               <div className="mt-8">
                 <Message text="Select a genre to see details." />
               </div>
