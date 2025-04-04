@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { fetchData } from "../services/apiServices";
 import PaintingModal from "./PaintingModal";
-import PaintingImage from "./PaintingImage";
 import Message from "./Message";
+import ImageComponent from "./ImageComponent";
 
 const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
 
@@ -18,7 +18,7 @@ const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";
  * @param {string} [defaultSort="sortByTitle"]  - The default sort option for the paintings. Default is alphabetical title sort
  * @returns {JSX.Element} PaintingsList component
  */
-const PaintingsList = ({ queryType, queryValue, size = "w_800", columns = 1, defaultSort = "sortByTitle"}) => {
+const PaintingsList = ({ queryType, queryValue, size = "full", columns = 1, defaultSort = "sortByTitle"}) => {
   const [paintings, setPaintings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -157,7 +157,7 @@ const PaintingsList = ({ queryType, queryValue, size = "w_800", columns = 1, def
           key={painting.paintingId}
           className="cursor-pointer mr-2 mb-2 font-quicksand rounded-xl backdrop-blur bg-white bg-opacity-30 p-3 shadow flex flex-col h-full">
             <div className="h-90 flex justify-center items-center">
-              <PaintingImage painting={painting} size={size} />
+              <ImageComponent id={painting.imageFileName} size={size} />
             </div>
             <h3 className="text-lg font-bold mt-2">{painting.title}</h3>
             <p className="text-sm text-bg-[#21130d]">{painting.medium}</p>

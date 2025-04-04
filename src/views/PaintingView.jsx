@@ -25,7 +25,7 @@ const PaintingView = () => {
             queryValue={appliedFilter.value}
             defaultSort={sortOption}
             setSortOption={setSortOption}
-            size="w_800"
+            size="square"
             columns={3}
           />
         </div>

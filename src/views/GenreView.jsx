@@ -4,6 +4,7 @@ import SortedList from "../components/SortedList";
 import PaintingsList from "../components/PaintingsList.jsx";
 import Message from "../components/Message.jsx";
 import LoadingFetch from "../hooks/LoadingFetch";
+import ImageComponent from "../components/ImageComponent.jsx";
 
 const GenreView = () => {
   const background = "/assets/loginBackground.jpg";
@@ -48,20 +49,26 @@ const GenreView = () => {
 
         {/* Right column - Genre details */}
         <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
-          <div className="h-5/12 min-h-5/12">
+          <div className="h-9/12 min-h-9/12 max-h-9/12">
             {selectedGenre ? (
               <div className="flex justify-between items-center">
+                <div className="p-4 custom-scrollbar max-h-9/12 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
+                 {/* Image with controlled size */}
+                <ImageComponent 
+                  id={selectedGenre.genreId} 
+                  type="genre" 
+                  className="max-h-48 max-w-48" // Adjust max height and width in pixels (48 = 12rem)
+                />
                 <h2 className="text-shadow text-white font-bold m-2 font-alexbrush text-2xl">
                   {selectedGenre.genreName}
+                </h2>
+                  <strong>Description:</strong> {selectedGenre.description}
                   <a
                     href={selectedGenre.wikiLink}
-                    className="items-right font-quicksand text-xs inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+                    className="items-center font-quicksand text-xs text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
                   >
                     Learn more
                   </a>
-                </h2>
-                <div className="p-4 custom-scrollbar max-h-40 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
-                  <strong>Description:</strong> {selectedGenre.description}
                 </div>
               </div>
             ) : (
@@ -77,7 +84,7 @@ const GenreView = () => {
               <PaintingsList
                 queryType="genres"
                 queryValue={selectedGenreId}
-                size="w_800"
+                size="square"
                 columns={3}
               />
             ) : (

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import PaintingImage from "./PaintingImage";
+import PaintingImage from "./ImageComponent";
 import { fetchData } from "../services/apiServices";
 import FavoriteButton from "./FavoriteButton";
+import ImageComponent from "./ImageComponent";
 
 Modal.setAppElement("#root");
 
@@ -55,10 +56,10 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
       <div className="bg-white backdrop-blur bg-opacity-80 w-3/4 h-3/4 rounded-xl shadow-lg flex flex-col md:flex-row">
         {/* Left Column: Painting Image */}
         <div className="w-full md:w-1/2 p-4 h-full flex items-center justify-center overflow-hidden rounded-l-xl">
-          <PaintingImage
-            painting={painting}
-            size="w_800"
-            className="w-full h-full object-cover"
+          <ImageComponent
+            id={painting.imageFileName}
+            type="painting"
+            size="full"
           />
         </div>
 

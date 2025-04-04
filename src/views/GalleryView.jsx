@@ -107,7 +107,7 @@ const GalleryView = () => {
               <PaintingsList 
                 queryType="gallery" 
                 queryValue={selectedGalleryId}
-                size="w_800" 
+                size="square" 
               />
             ) : (
               <Message text="Select a gallery to view paintings." />

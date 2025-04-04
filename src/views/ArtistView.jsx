@@ -5,6 +5,7 @@ import LoadingFetch from "../hooks/LoadingFetch";
 import PaintingsList from "../components/PaintingsList";
 import FavoriteButton from "../components/FavoriteButton";
 import Message from "../components/Message";
+import ImageComponent from "../components/ImageComponent";
 
 const ArtistView = () => {
   const background = "/assets/loginBackground.jpg"; // Background image path
@@ -44,7 +45,8 @@ const ArtistView = () => {
               .filter((artist) => artist.artistId === selectedArtistId)
               .map((artist) => (
                 <div className="p-4 bg-white bg-opacity-30 rounded-xl backdrop-blur-xl" key={artist.artistId}>
-                  <p><strong>Name:</strong> {artist.firstName} {artist.lastName}</p>
+                  <ImageComponent id={artist.artistId} type="artist" size="square"/>
+                  <p className="mt-2"><strong>Name:</strong> {artist.firstName} {artist.lastName}</p>
                   <p><strong>Nationality:</strong> {artist.nationality}</p>
                   <p><strong>Born:</strong> {artist.yearOfBirth}</p>
                   <p><strong>Died:</strong> {artist.yearOfDeath || "N/A"}</p>
@@ -81,7 +83,7 @@ const ArtistView = () => {
               <PaintingsList 
                 queryType="artist" 
                 queryValue={selectedArtistId} 
-                size="w_800" 
+                size="square" 
               />
             ) : (
               <Message text="Select an artist to view their paintings"/>
