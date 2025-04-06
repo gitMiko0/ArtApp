@@ -1,12 +1,9 @@
 # ArtApp
 
-This React-based single-page application (SPA) is an interactive gallery exploration tool that allows users to browse and discover art collections. The app provides different views to explore artists, galleries, paintings, and genres while enabling users to sort, filter, and add favorites. Users can navigate between views seamlessly and view details about specific artworks in modals. The app retrieves data either from a web API (from Assignment 1) or directly from a Supabase database.
+This React-based single-page application (SPA) is an interactive gallery exploration tool that allows users to browse and discover art collections. The app provides different views to explore artists, galleries, paintings, and genres while enabling users to sort, filter, and add favorites. Users can navigate between views seamlessly and view details about specific artworks in modals. 
+
 Note:
 As of April 5, 2025, the login functionality is not yet implemented--the sign-in buttons directs users toward the artist page.
-
-# ArtApp
-
-**ArtApp** is a React-based Single Page Application (SPA) designed for exploring and interacting with curated art collections. It provides an engaging and user-friendly interface for discovering artists, galleries, paintings, and genres through a variety of views and intuitive navigation.
 
 ## Features
 
