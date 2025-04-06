@@ -24,7 +24,7 @@ As of April 5, 2025, the login functionality is not yet implemented--the sign-in
 
 - **Data Flexibility**  
   Retrieves data either via:
-  - A custom web API (from Assignment 1), or
+  - A custom web API (from Assignment 1, https://nodea1.onrender.com/api/), or
   - provided locally in the package
 
 ## Technologies Used
