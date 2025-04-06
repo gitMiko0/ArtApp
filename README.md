@@ -5,6 +5,8 @@ This React-based single-page application (SPA) is an interactive gallery explora
 Note:
 As of April 5, 2025, the login functionality is not yet implemented--the sign-in buttons directs users toward the artist page.
 
+Live website is available at https://artapp-6p6m.onrender.com/
+
 ## Features
 
 - **Browse and Discover**  
