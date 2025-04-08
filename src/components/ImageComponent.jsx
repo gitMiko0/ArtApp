@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload"; // Requirements changed for image source, but this is left here intentionally.
+// const CLOUDINARY_BASE_URL = "https://res.cloudinary.com/funwebdev/image/upload";  Requirements changed for image source, but this is left here intentionally.
 const PLACEHOLDER_IMAGE = "/assets/placeholder.jpg"; // Placeholder for missing images
 
 const LOCAL_BASE_PATH = "/art-images"; // Base path for all image types
