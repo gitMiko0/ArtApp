@@ -54,13 +54,18 @@ const ImageComponent = ({ id, type = "painting", size = "full" }) => {
   };
 
   const handleLoad = () => {
-    if (imageKey && !imageError && imageUrl !== PLACEHOLDER_IMAGE) {
+    if (
+      imageKey &&
+      !imageError &&
+      imageUrl !== PLACEHOLDER_IMAGE &&
+      !localStorage.getItem(imageKey) // Don't overwrite if already cached
+    ) {
       console.log("Caching image:", imageUrl);
       localStorage.setItem(imageKey, imageUrl);
     }
     setIsLoading(false);
   };
-
+  
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       {isLoading && !imageError && (

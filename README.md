@@ -27,7 +27,7 @@ Live website is available at https://artapp-6p6m.onrender.com/
 - **Data Flexibility**  
   Retrieves data either via:
   - A custom web API (from Assignment 1, https://nodea1.onrender.com/api/), or
-  - provided locally in the package
+  - local assets in the public folder (eg. images)
 
 ## Technologies Used
 
