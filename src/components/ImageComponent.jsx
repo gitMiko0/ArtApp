@@ -35,6 +35,7 @@ const ImageComponent = ({ id, type = "painting", size = "full" }) => {
     if (localImagePath) {
       console.log("Generated local image path:", localImagePath);
 
+      setIsLoading(true);
       const cachedImage = localStorage.getItem(imageKey);
       console.log("Cached image:", cachedImage);
 
