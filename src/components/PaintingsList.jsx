@@ -163,7 +163,14 @@ const PaintingsList = ({ queryType, queryValue, size = "full", columns = 1, defa
             <p className="text-sm text-bg-[#21130d]">{painting.medium}</p>
             <p className="text-sm"><strong>Year:</strong> {painting.yearOfWork}</p>
             <p className="text-sm"><strong>Dimensions:</strong> {painting.width} × {painting.height} cm</p>
-            <p className="text-sm text-bg-[#21130d]">{painting.excerpt}</p>          
+            {/* the following element is due to some content containing HTML tags */}  
+            <p
+              className="text-sm text-bg-[#21130d]"
+              dangerouslySetInnerHTML={{
+                __html: painting.description || "No description available.",
+              }}
+            />
+      
         <div className="mt-auto">
           {painting.wikiLink ? (
           <a
