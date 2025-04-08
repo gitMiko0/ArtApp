@@ -5,32 +5,30 @@ import PaintingsFilter from '../components/PaintingsFilter';
 const PaintingView = () => {
   const background = "/assets/loginBackground.jpg";
 
-  const [filterType, setFilterType] = useState("artist"); // artist, genre, or gallery
-  const [filterValue, setFilterValue] = useState("");
-  const [sortOption, setSortOption] = useState("sortByTitle"); //initial state
+  const [sortOption, setSortOption] = useState("sortByTitle"); // title as default sort
+  const [appliedFilter, setAppliedFilter] = useState({});
 
   return (
     <div
-      className="pt-12 flex h-screen w-screen bg-cover bg-center overflow-y-auto"
+      className="pt-12 flex h-screen w-screen bg-cover bg-center"
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="flex w-3/12">
         <PaintingsFilter 
-          filterType={filterType}
-          setFilterType={setFilterType}
-          filterValue={filterValue}
-          setFilterValue={setFilterValue}
+          setAppliedFilter={setAppliedFilter}
         />
       </div>
-      <div className="font-quicksand custom-scrollbar w-9/12">
+      <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
+        <div>
           <PaintingsList 
-            queryType={filterType}
-            queryValue={filterValue}
+            queryType={appliedFilter.type}
+            queryValue={appliedFilter.value}
             defaultSort={sortOption}
             setSortOption={setSortOption}
-            size="w_900"
+            size="square"
             columns={3}
           />
+        </div>
       </div>
     </div>
   );

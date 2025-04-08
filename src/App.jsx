@@ -7,9 +7,11 @@ import GenreView from './views/GenreView';
 import LoginView from './views/LoginView';
 import PaintingView from './views/PaintingView';
 import './App.css';
+import { FavoritesProvider } from './hooks/FavoritesProvider.jsx';
 
 const App = () => {
   return (
+    <FavoritesProvider>
     <Router>
       <div className="App">
         <Routes>
@@ -38,6 +40,7 @@ const App = () => {
         </Routes>
       </div>
     </Router>
+    </FavoritesProvider>
   );
 };
 

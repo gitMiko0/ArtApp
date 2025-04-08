@@ -2,40 +2,23 @@ import React, { useState, useEffect } from "react";
 import Loading from "../components/Loading";
 import SortedList from "../components/SortedList";
 import PaintingsList from "../components/PaintingsList.jsx";
-import { fetchData } from "../services/apiServices.js";
+import Message from "../components/Message.jsx";
+import LoadingFetch from "../hooks/LoadingFetch";
+import ImageComponent from "../components/ImageComponent.jsx";
 
 const GenreView = () => {
-  //const background = "/assets/jr-korpa-KMEiyRyHW74-unsplash.jpg";
   const background = "/assets/loginBackground.jpg";
-  const [genres, setGenres] = useState([]); // State to store genres
-  const [selectedGenreId, setSelectedGenreId] = useState(null); // State for selected genre ID
-  const [selectedGenre, setSelectedGenre] = useState(null); // State for selected genre details
-  const [loading, setLoading] = useState(true); // Loading state
+  const { data: genres, loading, error } = LoadingFetch("genres"); // Use the hook for fetch & caching
+  const [selectedGenreId, setSelectedGenreId] = useState(null);
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
-  useEffect(() => {
-    const loadGenres = async () => {
-      try {
-        const data = await fetchData("genres");
-        console.log("Fetched Genres:", data); // Debugging output
-        setGenres(data);
-      } catch (error) {
-        console.error("Error fetching genres:", error);
-        setGenres([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadGenres();
-  }, []);
-
-  // Fetch selected genre details when selectedGenreId changes
+  // Update selected genre when the ID changes
   useEffect(() => {
     if (selectedGenreId) {
       const selected = genres.find((genre) => genre.genreId === selectedGenreId);
       setSelectedGenre(selected);
     } else {
-      setSelectedGenre(null); // Clear details when no genre is selected
+      setSelectedGenre(null);
     }
   }, [selectedGenreId, genres]);
 
@@ -46,9 +29,11 @@ const GenreView = () => {
     >
       <div className="flex h-full w-full">
         {/* Left column - Genre list */}
-        <div className="font-quicksand custom-scrollbar w-3/12 bg-gray-200 bg-opacity-10 p-4 overflow-y-auto">
+        <div className="font-quicksand custom-scrollbar w-3/12 p-4 overflow-y-auto">
           {loading ? (
             <Loading />
+          ) : error ? (
+            <Message text={`Error: ${error}`} />
           ) : (
             <SortedList
               header="Genres"
@@ -62,42 +47,58 @@ const GenreView = () => {
           )}
         </div>
 
-        {/* Right column - Genre details */}
-        <div className="font-quicksand custom-scrollbar h-3/12 w-9/12 bg-gray-200 bg-opacity-10 overflow-y-auto">
-          <div className="h-3/12 max-h-3/12">
-            {/* Genre details shown here */}
+      {/* Genre details */}
+        <div className="font-quicksand custom-scrollbar w-9/12 overflow-y-auto">
+          <div className="h-9/12 min-h-9/12 max-h-9/12">
             {selectedGenre ? (
-              <div className="flex justify-between items-center">
-                <h2 className="text-shadow text-white font-bold m-2 font-alexbrush text-2xl">
-                  {selectedGenre.genreName} 
+              <div className="flex justify-between items-start p-4 custom-scrollbar max-h-9/12 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
+                
+                {/* Left side: Image + Genre Name */}
+                <div className="flex flex-col items-center w-4/12">
+                  <div className="w-11/12 h-11/12 overflow-hidden rounded-lg flex-shrink-0">
+                    <ImageComponent 
+                      id={selectedGenre.genreId} 
+                      type="genre" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h2 className="text-shadow text-white font-bold mt-2 font-alexbrush text-2xl">
+                    {selectedGenre.genreName}
+                  </h2>
                   <a
                     href={selectedGenre.wikiLink}
-                    className="items-right font-quicksand text-xs inline-block text-white bg-[#ae752f] p-1 pl-2 pr-2 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
+                    className="inline-block font-quicksand text-xs text-white bg-[#ae752f] p-1 px-3 mt-2 rounded-xl font-normal hover:bg-[#21130d] hover:text-white transition-colors duration-300"
                   >
                     Learn more
                   </a>
-                </h2>
-                <div className="p-4 custom-scrollbar max-h-40 text-sm m-2 bg-white bg-opacity-20 rounded-xl backdrop-blur-xl overflow-y-auto">
+                </div>
+
+                {/* Right side: Description */}
+                <div className="flex flex-col w-8/12 ml-4">
                   <strong>Description:</strong> {selectedGenre.description}
                 </div>
               </div>
             ) : (
-              <p className="h-40 font-quicksand p-4">Select a genre to see details.</p>
+              <div className="mt-8">
+                <Message text="Select a genre to see details." />
+              </div>
             )}
           </div>
 
           {/* Paintings for the selected genre */}
           <div>
             {selectedGenreId ? (
-               <PaintingsList
-               queryType="genres"
-               queryValue={selectedGenreId}
-               size="w_400" 
-               columns={3}
-             />
+              <PaintingsList
+                queryType="genres"
+                queryValue={selectedGenreId}
+                size="square"
+                columns={3}
+              />
             ) : (
-              <p className="font-quicksand p-4">Select a genre to see paintings.</p>
-            )};
+              <div className="mt-48">
+                <Message text="Select a genre to see paintings." />
+              </div>
+            )}
           </div>
         </div>
       </div>
