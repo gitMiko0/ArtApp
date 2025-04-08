@@ -22,29 +22,6 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
   const [gallery, setGallery] = useState(null);
   const [artist, setArtist] = useState(null);
 
-  useEffect(() => {
-    
-    const fetchArtData = async () => {
-      try {
-        if (painting.galleryId) {
-          const galleryResponse = await fetchData(`galleries/${painting.galleryId}`);
-          setGallery(galleryResponse);
-        }
-        if (painting.artistId) {
-          const artistResponse = await fetchData(`artists/${painting.artistId}`);
-          setArtist(artistResponse);
-          console.log("Artist ID:", painting.artistId, "Data:", artistResponse);
-        }
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    };
-  
-    fetchArtData();
-  }, [painting.galleryId, painting.artistId]);
-  
-
-
   return (
     <Modal
       isOpen={!!painting}
@@ -69,10 +46,11 @@ const PaintingModal = ({ painting, onClose, onAddToFavorites }) => {
             <h2 className="font-quicksand text-3xl font-semibold mb-2">
               {painting.title}
             </h2>
-            {artist && (
-            <p className="font-quicksand text-xl font-semibold mb-2">
-                {artist.firstName} {artist.lastName}
-            </p> )}
+            {(painting.artistFirstName || painting.artistLastName) && (
+                <p className="font-quicksand text-xl font-semibold mb-2">
+                  {painting.artistFirstName} {painting.artistLastName}
+                </p>
+              )}
 
             <p className="font-quicksand text-sm text-gray-800 mb-4">
               {painting.description || "No description available."}
