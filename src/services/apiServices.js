@@ -1,4 +1,5 @@
 const API_URL = "https://nodea1.onrender.com/api";
+const API_URL_V2 = "https://elysiana-backend.up.railway.app/api";
 
 /**
  * Generic function to fetch data from a given endpoint.
@@ -7,7 +8,7 @@ const API_URL = "https://nodea1.onrender.com/api";
  */
 export const fetchData = async (route) => {
   try {
-    const response = await fetch(`${API_URL}/${route}`);
+    const response = await fetch(`${API_URL_V2}/${route}`);
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText}`);
     }
